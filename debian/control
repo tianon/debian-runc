@@ -1,0 +1,38 @@
+Source: runc
+Section: devel
+Priority: extra
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Uploaders: Alexandre Viau <alexandre@alexandreviau.net>,
+Build-Depends: debhelper (>= 9),
+               dh-golang,
+               golang-go,
+               golang-github-opencontainers-specs-dev,
+               golang-docker-dev,
+               golang-gocapability-dev
+Standards-Version: 3.9.6
+Homepage: https://github.com/opencontainers/runc
+Vcs-Git: git://anonscm.debian.org/pkg-go/packages/runc.git
+Vcs-Browser: http://anonscm.debian.org/cgit/pkg-go/packages/runc.git
+
+Package: runc
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Built-Using: ${misc:Built-Using}
+Description: runc container cli tools
+ runc is a CLI tool for spawning and running containers according
+ to the OCF specification. 
+
+Package: runc-dev
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         golang-github-opencontainers-specs,
+         golang-docker-dev,
+         golang-gocapability-dev
+Built-Using: ${misc:Built-Using}
+Description: runc container cli tools - dev package
+ runc is a CLI tool for spawning and running containers according
+ to the OCF specification.
+ .
+ This is the dev package.
