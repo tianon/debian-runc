@@ -9,7 +9,7 @@ Build-Depends: debhelper (>= 9),
                golang-github-opencontainers-specs-dev,
                golang-docker-dev,
                golang-gocapability-dev | golang-github-syndtr-gocapability-dev,
-               golang-go-systemd-dev | golang-github-coreos-go-systemd-dev
+               golang-github-coreos-go-systemd-dev
 Standards-Version: 3.9.6
 Homepage: https://github.com/opencontainers/runc
 Vcs-Git: git://anonscm.debian.org/pkg-go/packages/runc.git
@@ -31,7 +31,7 @@ Depends: ${misc:Depends},
          golang-github-opencontainers-specs,
          golang-docker-dev,
          golang-gocapability-dev | golang-github-syndtr-gocapability-dev,
-         golang-go-systemd-dev | golang-github-coreos-go-systemd-dev
+         golang-github-coreos-go-systemd-dev
 Built-Using: ${misc:Built-Using}
 Description: runc container cli tools - dev package
  runc is a CLI tool for spawning and running containers according
