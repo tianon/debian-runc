@@ -1,5 +1,5 @@
 runc (0.0.3+dfsg1-1) unstable; urgency=low
 
-  * Initial release. (Closes: #XXXXXX)
+  * Initial release. (Closes: #796486)
 
  -- Alexandre Viau <alexandre@alexandreviau.net>  Thu, 20 Aug 2015 21:02:47 -0400
