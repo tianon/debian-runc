@@ -24,7 +24,7 @@ Description: runc container cli tools
  runc is a CLI tool for spawning and running containers according
  to the OCF specification. 
 
-Package: runc-dev
+Package: golang-github-opencontainers-runc-dev
 Architecture: all
 Depends: ${misc:Depends},
          ${shlibs:Depends},
