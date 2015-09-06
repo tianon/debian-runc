@@ -4,3 +4,7 @@ export DH_GOPKG := github.com/opencontainers/runc
 
 %:
 	dh $@ --buildsystem=golang --with=golang
+
+override_dh_auto_configure:
+	$(MAKE) -C libcontainer/criurpc
+	dh_auto_configure
