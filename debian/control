@@ -3,6 +3,7 @@ Section: devel
 Priority: extra
 Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
 Uploaders: Alexandre Viau <alexandre@alexandreviau.net>,
+           Dmitry Smirnov <onlyjob@debian.org>
 Build-Depends: debhelper (>= 9),
                dh-golang,
                help2man,
