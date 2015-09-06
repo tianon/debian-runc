@@ -5,6 +5,7 @@ Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org
 Uploaders: Alexandre Viau <alexandre@alexandreviau.net>,
 Build-Depends: debhelper (>= 9),
                dh-golang,
+               help2man,
                golang-codegangsta-cli-dev,
                golang-dbus-dev,
                golang-docker-dev,

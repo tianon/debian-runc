@@ -15,7 +15,10 @@ override_dh_auto_configure:
 	dh_auto_configure
 	ln -svrf Godeps/_workspace/src/github.com/opencontainers/specs  _build/src/github.com/opencontainers/
 
-override_dh_auto_test:
+override_dh_auto_test: _build/runc.1
 	## Ignoring errors (some tests need network):
 	-dh_auto_test
 
+_build/runc.1:
+	help2man --no-info _build/bin/runc >"$@"
+	[ -s "$@" ] || $(RM) -v "$@"
