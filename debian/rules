@@ -3,8 +3,15 @@
 export DH_GOPKG := github.com/opencontainers/runc
 
 %:
-	dh $@ --buildsystem=golang --with=golang
+	dh $@ --buildsystem=golang --with=golang --builddirectory=_build
+
+override_dh_clean:
+	dh_clean
+	## Remove Files-Excluded (when built from checkout or non-DFSG tarball):
+	$(RM) -rv `perl -0nE 'say $$1 if m{^Files\-Excluded\:\s*(.*?)(?:\n\n|Files:|Comment:)}sm;' debian/copyright`
 
 override_dh_auto_configure:
 	$(MAKE) -C libcontainer/criurpc
 	dh_auto_configure
+	ln -svrf Godeps/_workspace/src/github.com/opencontainers/specs  _build/src/github.com/opencontainers/
+

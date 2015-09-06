@@ -1,11 +1,22 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: runc
 Source: https://github.com/opencontainers/runc
-Files-Excluded: Godeps/*
-
+Files-Excluded:
+    Godeps/_workspace/src/github.com/Sirupsen/logrus
+    Godeps/_workspace/src/github.com/codegangsta/cli
+    Godeps/_workspace/src/github.com/coreos/go-systemd
+    Godeps/_workspace/src/github.com/docker/docker
+    Godeps/_workspace/src/github.com/godbus/dbus
+    Godeps/_workspace/src/github.com/golang/protobuf
+    Godeps/_workspace/src/github.com/syndtr/gocapability
+  __Godeps/_workspace/src/github.com/opencontainers/specs
 
 Files: *
-Copyright: 2014 Docker, Inc.
+Copyright: 2012-2015 Docker, Inc.
+License: Apache-2.0
+
+Files: Godeps/_workspace/src/github.com/opencontainers/specs/*
+Copyright: 2015 The Linux Foundation.
 License: Apache-2.0
 
 Files: debian/*
