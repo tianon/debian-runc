@@ -21,8 +21,13 @@ License: Apache-2.0
 
 Files: debian/*
 Copyright: 2015 Alexandre Viau <alexandre@alexandreviau.net>
-License: Apache-2.0
-Comment: Debian packaging is licensed under the same terms as upstream
+           2015 Dmitry Smirnov <onlyjob@debian.org>
+License: GPL-3+
+
+Files: debian/patches/*
+Copyright: 2015 Dmitry Smirnov <onlyjob@debian.org>
+License: GPL-3+ or Apache-2.0
+Comment: patches can be licensed under the same terms as upstream.
 
 License: Apache-2.0
  Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,5 +42,19 @@ License: Apache-2.0
  See the License for the specific language governing permissions and
  limitations under the License.
  .
- On Debian systems, the complete text of the Apache version 2.0 license
+ The complete text of the Apache version 2.0 license
  can be found in "/usr/share/common-licenses/Apache-2.0".
+
+License: GPL-3+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+ ․
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ ․
+ The complete text of the GNU General Public License version 3
+ can be found in "/usr/share/common-licenses/GPL-3".
