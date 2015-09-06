@@ -33,8 +33,7 @@ Description: Open Container Project - runtime
 
 Package: golang-github-opencontainers-runc-dev
 Architecture: all
-Depends: golang-docker-dev,
-         golang-codegangsta-cli-dev,
+Depends: golang-codegangsta-cli-dev,
          golang-dbus-dev,
          golang-docker-dev,
          golang-github-coreos-go-systemd-dev,
