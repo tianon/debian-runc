@@ -24,9 +24,10 @@ Package: runc
 Architecture: all
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Built-Using: ${misc:Built-Using}
-Description: runc container cli tools
- runc is a CLI tool for spawning and running containers according
- to the OCF specification. 
+Description: Open Container Project - runtime
+ "runc" is a command line client for running applications packaged according
+ to the Open Container Format (OCF) and is a compliant implementation of
+ the Open Container Project specification.
 
 Package: golang-github-opencontainers-runc-dev
 Architecture: all
@@ -42,8 +43,10 @@ Depends: golang-docker-dev,
          ${misc:Depends},
          ${shlibs:Depends}
 Built-Using: ${misc:Built-Using}
-Description: runc container cli tools - dev package
- runc is a CLI tool for spawning and running containers according
- to the OCF specification.
+Description: Open Container Project - develpoment files
+ "runc" is a command line client for running applications packaged according
+ to the Open Container Format (OCF) and is a compliant implementation of
+ the Open Container Project specification.
  .
- This is the dev package.
+ This package provides development files formerly known as
+ "github.com/docker/libcontainer".
