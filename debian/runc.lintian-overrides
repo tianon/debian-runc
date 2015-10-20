@@ -1,3 +1,0 @@
-## Acknowledged:
-hardening-no-relro usr/bin/runc
-hardening-no-fortify-functions usr/bin/runc

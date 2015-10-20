@@ -1,6 +1,7 @@
 runc (0.0.4~dfsg-1) unstable; urgency=medium
 
   * New upstream release (Closes: #802507).
+  * Dropped obsolete lintian-overrides.
 
  -- Dmitry Smirnov <onlyjob@debian.org>  Wed, 21 Oct 2015 09:02:42 +1100
 
