@@ -15,7 +15,7 @@ import (
 	"github.com/codegangsta/cli"
 	"github.com/opencontainers/runc/libcontainer/cgroups"
 	"github.com/opencontainers/runc/libcontainer/configs"
-	"github.com/opencontainers/runc/libcontainer/devices"
+	"github.com/opencontainers/runc/libcontainer/seccomp"
 	"github.com/opencontainers/specs"
 )
 
@@ -94,7 +94,7 @@ var specCommand = cli.Command{
 			Linux: specs.Linux{
 				Namespaces: []specs.Namespace{
 					{
-						Type: "process",
+						Type: "pid",
 					},
 					{
 						Type: "network",
@@ -114,18 +114,84 @@ var specCommand = cli.Command{
 					"KILL",
 					"NET_BIND_SERVICE",
 				},
-				Devices: []string{
-					"null",
-					"random",
-					"full",
-					"tty",
-					"zero",
-					"urandom",
+				Rlimits: []specs.Rlimit{
+					{
+						Type: syscall.RLIMIT_NOFILE,
+						Hard: uint64(1024),
+						Soft: uint64(1024),
+					},
+				},
+
+				Devices: []specs.Device{
+					{
+						Type:        'c',
+						Path:        "/dev/null",
+						Major:       1,
+						Minor:       3,
+						Permissions: "rwm",
+						FileMode:    0666,
+						UID:         0,
+						GID:         0,
+					},
+					{
+						Type:        'c',
+						Path:        "/dev/random",
+						Major:       1,
+						Minor:       8,
+						Permissions: "rwm",
+						FileMode:    0666,
+						UID:         0,
+						GID:         0,
+					},
+					{
+						Type:        'c',
+						Path:        "/dev/full",
+						Major:       1,
+						Minor:       7,
+						Permissions: "rwm",
+						FileMode:    0666,
+						UID:         0,
+						GID:         0,
+					},
+					{
+						Type:        'c',
+						Path:        "/dev/tty",
+						Major:       5,
+						Minor:       0,
+						Permissions: "rwm",
+						FileMode:    0666,
+						UID:         0,
+						GID:         0,
+					},
+					{
+						Type:        'c',
+						Path:        "/dev/zero",
+						Major:       1,
+						Minor:       5,
+						Permissions: "rwm",
+						FileMode:    0666,
+						UID:         0,
+						GID:         0,
+					},
+					{
+						Type:        'c',
+						Path:        "/dev/urandom",
+						Major:       1,
+						Minor:       9,
+						Permissions: "rwm",
+						FileMode:    0666,
+						UID:         0,
+						GID:         0,
+					},
 				},
 				Resources: specs.Resources{
 					Memory: specs.Memory{
 						Swappiness: -1,
 					},
+				},
+				Seccomp: specs.Seccomp{
+					DefaultAction: "SCMP_ACT_ALLOW",
+					Syscalls:      []*specs.Syscall{},
 				},
 			},
 		}
@@ -138,7 +204,7 @@ var specCommand = cli.Command{
 }
 
 var namespaceMapping = map[string]configs.NamespaceType{
-	"process": configs.NEWPID,
+	"pid":     configs.NEWPID,
 	"network": configs.NEWNET,
 	"mount":   configs.NEWNS,
 	"user":    configs.NEWUSER,
@@ -176,7 +242,7 @@ func checkSpecVersion(s *specs.LinuxSpec) error {
 	return nil
 }
 
-func createLibcontainerConfig(spec *specs.LinuxSpec) (*configs.Config, error) {
+func createLibcontainerConfig(cgroupName string, spec *specs.LinuxSpec) (*configs.Config, error) {
 	cwd, err := os.Getwd()
 	if err != nil {
 		return nil, err
@@ -215,7 +281,10 @@ func createLibcontainerConfig(spec *specs.LinuxSpec) (*configs.Config, error) {
 	if err := setupUserNamespace(spec, config); err != nil {
 		return nil, err
 	}
-	c, err := createCgroupConfig(spec, config.Devices)
+	for _, rlimit := range spec.Linux.Rlimits {
+		config.Rlimits = append(config.Rlimits, createLibContainerRlimit(rlimit))
+	}
+	c, err := createCgroupConfig(cgroupName, spec, config.Devices)
 	if err != nil {
 		return nil, err
 	}
@@ -229,7 +298,14 @@ func createLibcontainerConfig(spec *specs.LinuxSpec) (*configs.Config, error) {
 			"/proc/sys", "/proc/sysrq-trigger", "/proc/irq", "/proc/bus",
 		}
 	}
+	seccomp, err := setupSeccomp(&spec.Linux.Seccomp)
+	if err != nil {
+		return nil, err
+	}
+	config.Seccomp = seccomp
 	config.Sysctl = spec.Linux.Sysctl
+	config.ProcessLabel = spec.Linux.SelinuxProcessLabel
+	config.AppArmorProfile = spec.Linux.ApparmorProfile
 	return config, nil
 }
 
@@ -250,13 +326,13 @@ func createLibcontainerMount(cwd string, m specs.Mount) *configs.Mount {
 	}
 }
 
-func createCgroupConfig(spec *specs.LinuxSpec, devices []*configs.Device) (*configs.Cgroup, error) {
+func createCgroupConfig(name string, spec *specs.LinuxSpec, devices []*configs.Device) (*configs.Cgroup, error) {
 	myCgroupPath, err := cgroups.GetThisCgroupDir("devices")
 	if err != nil {
 		return nil, err
 	}
 	c := &configs.Cgroup{
-		Name:           getDefaultID(),
+		Name:           name,
 		Parent:         myCgroupPath,
 		AllowedDevices: append(devices, allowedDevices...),
 	}
@@ -297,12 +373,18 @@ func createCgroupConfig(spec *specs.LinuxSpec, devices []*configs.Device) (*conf
 }
 
 func createDevices(spec *specs.LinuxSpec, config *configs.Config) error {
-	for _, name := range spec.Linux.Devices {
-		d, err := devices.DeviceFromPath(filepath.Join("/dev", name), "rwm")
-		if err != nil {
-			return err
+	for _, d := range spec.Linux.Devices {
+		device := &configs.Device{
+			Type:        d.Type,
+			Path:        d.Path,
+			Major:       d.Major,
+			Minor:       d.Minor,
+			Permissions: d.Permissions,
+			FileMode:    d.FileMode,
+			Uid:         d.UID,
+			Gid:         d.GID,
 		}
-		config.Devices = append(config.Devices, d)
+		config.Devices = append(config.Devices, device)
 	}
 	return nil
 }
@@ -333,19 +415,27 @@ func setupUserNamespace(spec *specs.LinuxSpec, config *configs.Config) error {
 	for _, m := range spec.Linux.GIDMappings {
 		config.GidMappings = append(config.GidMappings, create(m))
 	}
-	rootUid, err := config.HostUID()
+	rootUID, err := config.HostUID()
 	if err != nil {
 		return err
 	}
-	rootGid, err := config.HostGID()
+	rootGID, err := config.HostGID()
 	if err != nil {
 		return err
 	}
 	for _, node := range config.Devices {
-		node.Uid = uint32(rootUid)
-		node.Gid = uint32(rootGid)
+		node.Uid = uint32(rootUID)
+		node.Gid = uint32(rootGID)
 	}
 	return nil
+}
+
+func createLibContainerRlimit(rlimit specs.Rlimit) configs.Rlimit {
+	return configs.Rlimit{
+		Type: int(rlimit.Type),
+		Hard: uint64(rlimit.Hard),
+		Soft: uint64(rlimit.Soft),
+	}
 }
 
 // parseMountOptions parses the string and returns the flags and any mount data that
@@ -408,4 +498,60 @@ func parseMountOptions(options string) (int, string) {
 		}
 	}
 	return flag, strings.Join(data, ",")
+}
+
+func setupSeccomp(config *specs.Seccomp) (*configs.Seccomp, error) {
+	if config == nil {
+		return nil, nil
+	}
+
+	// No default action specified, no syscalls listed, assume seccomp disabled
+	if config.DefaultAction == "" && len(config.Syscalls) == 0 {
+		return nil, nil
+	}
+
+	newConfig := new(configs.Seccomp)
+	newConfig.Syscalls = []*configs.Syscall{}
+
+	// Convert default action from string representation
+	newDefaultAction, err := seccomp.ConvertStringToAction(string(config.DefaultAction))
+	if err != nil {
+		return nil, err
+	}
+	newConfig.DefaultAction = newDefaultAction
+
+	// Loop through all syscall blocks and convert them to libcontainer format
+	for _, call := range config.Syscalls {
+		newAction, err := seccomp.ConvertStringToAction(string(call.Action))
+		if err != nil {
+			return nil, err
+		}
+
+		newCall := configs.Syscall{
+			Name:   call.Name,
+			Action: newAction,
+			Args:   []*configs.Arg{},
+		}
+
+		// Loop through all the arguments of the syscall and convert them
+		for _, arg := range call.Args {
+			newOp, err := seccomp.ConvertStringToOperator(string(arg.Op))
+			if err != nil {
+				return nil, err
+			}
+
+			newArg := configs.Arg{
+				Index:    arg.Index,
+				Value:    arg.Value,
+				ValueTwo: arg.ValueTwo,
+				Op:       newOp,
+			}
+
+			newCall.Args = append(newCall.Args, &newArg)
+		}
+
+		newConfig.Syscalls = append(newConfig.Syscalls, &newCall)
+	}
+
+	return newConfig, nil
 }

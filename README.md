@@ -18,6 +18,8 @@ on the specs repository and support the update spec.
 
 ### Building:
 
+At the time of writing, runc only builds on the Linux platform.
+
 ```bash
 # create a 'github.com/opencontainers' in your GOPATH/src
 cd github.com/opencontainers
@@ -27,13 +29,14 @@ make
 sudo make install
 ```
 
+In order to enable seccomp support you will need to install libseccomp on your platform.
+If you do not with to build `runc` with seccomp support you can add `BUILDTAGS=""` when running make.
+
 ### Using:
 
-To run a container that you received just execute `runc` with the JSON format as the argument or have a
-`config.json` file in the current working directory.
-
+To run a container, execute `runc start` in the bundle's root directory:
 ```bash
-runc
+runc start
 / $ ps
 PID   USER     COMMAND
 1     daemon   sh
@@ -41,11 +44,23 @@ PID   USER     COMMAND
 / $
 ```
 
+Or you can specify the path to a JSON configuration file:
+```bash
+runc start config.json
+/ $ ps
+PID   USER     COMMAND
+1     daemon   sh
+5     daemon   sh
+/ $
+```
+Note: the use of the `start` command is required when specifying a 
+configuration file.
+
 ### OCF Container JSON Format:
 
 Below is a sample `config.json` configuration file. It assumes that
 the file-system is found in a directory called `rootfs` and there is a
-user named `daemon` defined within that file-system.
+user with uid and gid of `0` defined within that file-system.
 
 ```json
 {
@@ -122,7 +137,13 @@ user named `daemon` defined within that file-system.
     "linux": {
         "uidMapping": null,
         "gidMapping": null,
-        "rlimits": null,
+        "rlimits": [
+           {
+                "type": 7,
+                "hard": 1024,
+                "soft": 1024
+           }
+        ],
         "systemProperties": null,
         "resources": {
             "disableOOMKiller": false,
@@ -158,7 +179,7 @@ user named `daemon` defined within that file-system.
         },
         "namespaces": [
             {
-                "type": "process",
+                "type": "pid",
                 "path": ""
             },
             {
@@ -184,13 +205,67 @@ user named `daemon` defined within that file-system.
             "NET_BIND_SERVICE"
         ],
         "devices": [
-            "null",
-            "random",
-            "full",
-            "tty",
-            "zero",
-            "urandom"
-        ]
+                {
+                        "type": 99,
+                        "path": "/dev/null",
+                        "major": 1,
+                        "minor": 3,
+                        "permissions": "rwm",
+                        "fileMode": 438,
+                        "uid": 0,
+                        "gid": 0
+                },
+                {
+                        "type": 99,
+                        "path": "/dev/random",
+                        "major": 1,
+                        "minor": 8,
+                        "permissions": "rwm",
+                        "fileMode": 438,
+                        "uid": 0,
+                        "gid": 0
+                },
+                {
+                        "type": 99,
+                        "path": "/dev/full",
+                        "major": 1,
+                        "minor": 7,
+                        "permissions": "rwm",
+                        "fileMode": 438,
+                        "uid": 0,
+                        "gid": 0
+                },
+                {
+                        "type": 99,
+                        "path": "/dev/tty",
+                        "major": 5,
+                        "minor": 0,
+                        "permissions": "rwm",
+                        "fileMode": 438,
+                        "uid": 0,
+                        "gid": 0
+                },
+                {
+                        "type": 99,
+                        "path": "/dev/zero",
+                        "major": 1,
+                        "minor": 5,
+                        "permissions": "rwm",
+                        "fileMode": 438,
+                        "uid": 0,
+                        "gid": 0
+                },
+                {
+                        "type": 99,
+                        "path": "/dev/urandom",
+                        "major": 1,
+                        "minor": 9,
+                        "permissions": "rwm",
+                        "fileMode": 438,
+                        "uid": 0,
+                        "gid": 0
+                }
+        ],
     }
 }
 ```
@@ -210,9 +285,9 @@ tar -C rootfs -xf busybox.tar
 ```
 * Create a file called `config.json` using the example from above.  You can also
 generate a spec using `runc spec`, redirecting the output into `config.json`
-* Execute `runc` and you should be placed into a shell where you can run `ps`:
+* Execute `runc start` and you should be placed into a shell where you can run `ps`:
 ```
-$ runc
+$ runc start
 / # ps
 PID   USER     COMMAND
     1 root     sh

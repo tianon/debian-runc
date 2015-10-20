@@ -793,33 +793,6 @@ func TestSysctl(t *testing.T) {
 	}
 }
 
-func TestSeccompNoChown(t *testing.T) {
-	if testing.Short() {
-		return
-	}
-	rootfs, err := newRootfs()
-	if err != nil {
-		t.Fatal(err)
-	}
-	defer remove(rootfs)
-	config := newTemplateConfig(rootfs)
-	config.Seccomp = &configs.Seccomp{}
-	config.Seccomp.Syscalls = append(config.Seccomp.Syscalls, &configs.Syscall{
-		Value:  syscall.SYS_CHOWN,
-		Action: configs.Action(syscall.EPERM),
-	})
-	buffers, _, err := runContainer(config, "", "/bin/sh", "-c", "chown 1:1 /tmp")
-	if err == nil {
-		t.Fatal("running chown in a container should fail")
-	}
-	if buffers == nil {
-		t.Fatalf("Container wasn't even created: %v", err)
-	}
-	if s := buffers.String(); !strings.Contains(s, "not permitted") {
-		t.Fatalf("running chown should result in an EPERM but got %q", s)
-	}
-}
-
 func TestMountCgroupRO(t *testing.T) {
 	if testing.Short() {
 		return
@@ -846,7 +819,10 @@ func TestMountCgroupRO(t *testing.T) {
 	lines := strings.Split(mountInfo, "\n")
 	for _, l := range lines {
 		if strings.HasPrefix(l, "tmpfs on /sys/fs/cgroup") {
-			if !strings.Contains(l, "ro,nosuid,nodev,noexec") {
+			if !strings.Contains(l, "ro") ||
+				!strings.Contains(l, "nosuid") ||
+				!strings.Contains(l, "nodev") ||
+				!strings.Contains(l, "noexec") {
 				t.Fatalf("Mode expected to contain 'ro,nosuid,nodev,noexec': %s", l)
 			}
 			if !strings.Contains(l, "mode=755") {
@@ -857,7 +833,10 @@ func TestMountCgroupRO(t *testing.T) {
 		if !strings.HasPrefix(l, "cgroup") {
 			continue
 		}
-		if !strings.Contains(l, "ro,nosuid,nodev,noexec") {
+		if !strings.Contains(l, "ro") ||
+			!strings.Contains(l, "nosuid") ||
+			!strings.Contains(l, "nodev") ||
+			!strings.Contains(l, "noexec") {
 			t.Fatalf("Mode expected to contain 'ro,nosuid,nodev,noexec': %s", l)
 		}
 	}
@@ -889,7 +868,10 @@ func TestMountCgroupRW(t *testing.T) {
 	lines := strings.Split(mountInfo, "\n")
 	for _, l := range lines {
 		if strings.HasPrefix(l, "tmpfs on /sys/fs/cgroup") {
-			if !strings.Contains(l, "rw,nosuid,nodev,noexec") {
+			if !strings.Contains(l, "rw") ||
+				!strings.Contains(l, "nosuid") ||
+				!strings.Contains(l, "nodev") ||
+				!strings.Contains(l, "noexec") {
 				t.Fatalf("Mode expected to contain 'rw,nosuid,nodev,noexec': %s", l)
 			}
 			if !strings.Contains(l, "mode=755") {
@@ -900,8 +882,115 @@ func TestMountCgroupRW(t *testing.T) {
 		if !strings.HasPrefix(l, "cgroup") {
 			continue
 		}
-		if !strings.Contains(l, "rw,nosuid,nodev,noexec") {
+		if !strings.Contains(l, "rw") ||
+			!strings.Contains(l, "nosuid") ||
+			!strings.Contains(l, "nodev") ||
+			!strings.Contains(l, "noexec") {
 			t.Fatalf("Mode expected to contain 'rw,nosuid,nodev,noexec': %s", l)
 		}
+	}
+}
+
+func TestOomScoreAdj(t *testing.T) {
+	if testing.Short() {
+		return
+	}
+	root, err := newTestRoot()
+	ok(t, err)
+	defer os.RemoveAll(root)
+
+	rootfs, err := newRootfs()
+	ok(t, err)
+	defer remove(rootfs)
+
+	config := newTemplateConfig(rootfs)
+	config.OomScoreAdj = 200
+
+	factory, err := libcontainer.New(root, libcontainer.Cgroupfs)
+	ok(t, err)
+
+	container, err := factory.Create("test", config)
+	ok(t, err)
+	defer container.Destroy()
+
+	var stdout bytes.Buffer
+	pconfig := libcontainer.Process{
+		Args:   []string{"sh", "-c", "cat /proc/self/oom_score_adj"},
+		Env:    standardEnvironment,
+		Stdin:  nil,
+		Stdout: &stdout,
+	}
+	err = container.Start(&pconfig)
+	ok(t, err)
+
+	// Wait for process
+	waitProcess(&pconfig, t)
+	outputOomScoreAdj := strings.TrimSpace(string(stdout.Bytes()))
+
+	// Check that the oom_score_adj matches the value that was set as part of config.
+	if outputOomScoreAdj != strconv.Itoa(config.OomScoreAdj) {
+		t.Fatalf("Expected oom_score_adj %d; got %q", config.OomScoreAdj, outputOomScoreAdj)
+	}
+}
+
+func TestHook(t *testing.T) {
+	if testing.Short() {
+		return
+	}
+	root, err := newTestRoot()
+	ok(t, err)
+	defer os.RemoveAll(root)
+
+	rootfs, err := newRootfs()
+	ok(t, err)
+	defer remove(rootfs)
+
+	config := newTemplateConfig(rootfs)
+	config.Hooks = &configs.Hooks{
+		Prestart: []configs.Hook{
+			configs.NewFunctionHook(func(s configs.HookState) error {
+				f, err := os.Create(filepath.Join(s.Root, "test"))
+				if err != nil {
+					return err
+				}
+				return f.Close()
+			}),
+		},
+		Poststop: []configs.Hook{
+			configs.NewFunctionHook(func(s configs.HookState) error {
+				return os.RemoveAll(filepath.Join(s.Root, "test"))
+			}),
+		},
+	}
+	container, err := factory.Create("test", config)
+	ok(t, err)
+
+	var stdout bytes.Buffer
+	pconfig := libcontainer.Process{
+		Args:   []string{"sh", "-c", "ls /test"},
+		Env:    standardEnvironment,
+		Stdin:  nil,
+		Stdout: &stdout,
+	}
+	err = container.Start(&pconfig)
+	ok(t, err)
+
+	// Wait for process
+	waitProcess(&pconfig, t)
+
+	outputLs := string(stdout.Bytes())
+
+	// Check that the ls output has the expected file touched by the prestart hook
+	if !strings.Contains(outputLs, "/test") {
+		container.Destroy()
+		t.Fatalf("ls output doesn't have the expected file: %s", outputLs)
+	}
+
+	if err := container.Destroy(); err != nil {
+		t.Fatalf("container destory %s", err)
+	}
+	fi, err := os.Stat(filepath.Join(rootfs, "test"))
+	if err == nil || !os.IsNotExist(err) {
+		t.Fatalf("expected file to not exist, got %s", fi.Name())
 	}
 }

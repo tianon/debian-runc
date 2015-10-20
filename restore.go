@@ -3,15 +3,14 @@
 package main
 
 import (
+	"fmt"
 	"os"
-	"os/signal"
-	"syscall"
+	"path/filepath"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/codegangsta/cli"
 	"github.com/opencontainers/runc/libcontainer"
 	"github.com/opencontainers/runc/libcontainer/configs"
-	"github.com/opencontainers/runc/libcontainer/utils"
 	"github.com/opencontainers/specs"
 )
 
@@ -35,7 +34,7 @@ var restoreCommand = cli.Command{
 		if err != nil {
 			fatal(err)
 		}
-		config, err := createLibcontainerConfig(spec)
+		config, err := createLibcontainerConfig(context.GlobalString("id"), spec)
 		if err != nil {
 			fatal(err)
 		}
@@ -61,6 +60,13 @@ func restoreContainer(context *cli.Context, spec *specs.LinuxSpec, config *confi
 		}
 	}
 	options := criuOptions(context)
+	status, err := container.Status()
+	if err != nil {
+		logrus.Error(err)
+	}
+	if status == libcontainer.Running {
+		fatal(fmt.Errorf("Container with id %s already running", context.GlobalString("id")))
+	}
 	// ensure that the container is always removed if we were the process
 	// that created it.
 	defer func() {
@@ -89,16 +95,22 @@ func restoreContainer(context *cli.Context, spec *specs.LinuxSpec, config *confi
 	if err != nil {
 		return -1, err
 	}
-	defer tty.Close()
-	go handleSignals(process, tty)
+	handler := newSignalHandler(tty)
+	defer handler.Close()
 	if err := container.Restore(process, options); err != nil {
+		cstatus, cerr := container.Status()
+		if cerr != nil {
+			logrus.Error(cerr)
+		}
+		if cstatus == libcontainer.Destroyed {
+			dest := filepath.Join(context.GlobalString("root"), context.GlobalString("id"))
+			if errVal := os.RemoveAll(dest); errVal != nil {
+				logrus.Error(errVal)
+			}
+		}
 		return -1, err
 	}
-	status, err := process.Wait()
-	if err != nil {
-		return -1, err
-	}
-	return utils.ExitStatus(status.Sys().(syscall.WaitStatus)), nil
+	return handler.forward(process)
 }
 
 func criuOptions(context *cli.Context) *libcontainer.CriuOpts {
@@ -110,25 +122,9 @@ func criuOptions(context *cli.Context) *libcontainer.CriuOpts {
 		ImagesDirectory:         imagePath,
 		WorkDirectory:           context.String("work-path"),
 		LeaveRunning:            context.Bool("leave-running"),
-		TcpEstablished:          true, // context.Bool("tcp-established"),
+		TcpEstablished:          context.Bool("tcp-established"),
 		ExternalUnixConnections: context.Bool("ext-unix-sk"),
 		ShellJob:                context.Bool("shell-job"),
 		FileLocks:               context.Bool("file-locks"),
-	}
-}
-
-// we have to use this type of signal handler because there is a memory leak if we
-// wait and reap with SIGCHLD.
-func handleSignals(process *libcontainer.Process, tty *tty) {
-	sigc := make(chan os.Signal, 10)
-	signal.Notify(sigc)
-	tty.resize()
-	for sig := range sigc {
-		switch sig {
-		case syscall.SIGWINCH:
-			tty.resize()
-		default:
-			process.Signal(sig)
-		}
 	}
 }
