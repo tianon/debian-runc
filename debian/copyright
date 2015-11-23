@@ -9,6 +9,7 @@ Files-Excluded:
     Godeps/_workspace/src/github.com/godbus/dbus
     Godeps/_workspace/src/github.com/golang/protobuf
     Godeps/_workspace/src/github.com/syndtr/gocapability
+    Godeps/_workspace/src/github.com/vishvananda/netlink
   __Godeps/_workspace/src/github.com/opencontainers/specs
   __Godeps/_workspace/src/github.com/seccomp/libseccomp-golang
 
