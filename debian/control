@@ -18,7 +18,7 @@ Build-Depends: debhelper (>= 9),
     golang-goprotobuf-dev,
     golang-logrus-dev,
     protobuf-compiler
-Standards-Version: 3.9.6
+Standards-Version: 3.9.7
 Homepage: https://github.com/opencontainers/runc
 Vcs-Git: git://anonscm.debian.org/pkg-go/packages/runc.git
 Vcs-Browser: http://anonscm.debian.org/cgit/pkg-go/packages/runc.git
