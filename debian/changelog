@@ -1,10 +1,12 @@
-runc (0.0.5+dfsg-1) UNRELEASED; urgency=medium
+runc (0.0.8+dfsg-1) unstable; urgency=medium
 
-  * New upstream release [November 2015].
+  * New upstream release [February 2016].
   * Build-Depends:
     + golang-github-vishvananda-netlink-dev
+  * Updated Vcs URLs.
+  * Standards-Version: 3.9.7.
 
- -- Dmitry Smirnov <onlyjob@debian.org>  Tue, 24 Nov 2015 10:36:09 +1100
+ -- Dmitry Smirnov <onlyjob@debian.org>  Fri, 26 Feb 2016 18:19:24 +1100
 
 runc (0.0.4~dfsg-1) unstable; urgency=medium
 
