@@ -7,17 +7,17 @@ Uploaders: Alexandre Viau <alexandre@alexandreviau.net>,
 Build-Depends: debhelper (>= 9),
                dh-golang,
                help2man,
-               golang-codegangsta-cli-dev,
-               golang-dbus-dev,
-               golang-docker-dev,
-               golang-github-coreos-go-systemd-dev,
-               golang-github-opencontainers-specs-dev,
-               golang-github-vishvananda-netlink-dev,
-               golang-go,
-               golang-gocapability-dev | golang-github-syndtr-gocapability-dev,
-               golang-goprotobuf-dev,
-               golang-logrus-dev,
-               protobuf-compiler
+    golang-codegangsta-cli-dev,
+    golang-dbus-dev,
+    golang-docker-dev,
+    golang-github-coreos-go-systemd-dev,
+    golang-github-opencontainers-specs-dev,
+    golang-github-vishvananda-netlink-dev,
+    golang-go,
+    golang-gocapability-dev | golang-github-syndtr-gocapability-dev,
+    golang-goprotobuf-dev,
+    golang-logrus-dev,
+    protobuf-compiler
 Standards-Version: 3.9.6
 Homepage: https://github.com/opencontainers/runc
 Vcs-Git: git://anonscm.debian.org/pkg-go/packages/runc.git
@@ -34,17 +34,16 @@ Description: Open Container Project - runtime
 
 Package: golang-github-opencontainers-runc-dev
 Architecture: all
-Depends: golang-codegangsta-cli-dev,
-         golang-dbus-dev,
-         golang-docker-dev,
-         golang-github-coreos-go-systemd-dev,
-         golang-github-opencontainers-specs-dev,
-         golang-github-vishvananda-netlink-dev,
-         golang-gocapability-dev | golang-github-syndtr-gocapability-dev,
-         golang-goprotobuf-dev,
-         golang-logrus-dev,
-         ${misc:Depends},
-         ${shlibs:Depends}
+Depends: ${misc:Depends},
+    golang-codegangsta-cli-dev,
+    golang-dbus-dev,
+    golang-docker-dev,
+    golang-github-coreos-go-systemd-dev,
+    golang-github-opencontainers-specs-dev,
+    golang-github-vishvananda-netlink-dev,
+    golang-gocapability-dev | golang-github-syndtr-gocapability-dev,
+    golang-goprotobuf-dev,
+    golang-logrus-dev
 Built-Using: ${misc:Built-Using}
 Description: Open Container Project - develpoment files
  "runc" is a command line client for running applications packaged according
