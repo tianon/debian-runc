@@ -6,7 +6,7 @@ Files-Excluded:
     Godeps/_workspace/src/github.com/codegangsta/cli
     Godeps/_workspace/src/github.com/coreos/go-systemd
     Godeps/_workspace/src/github.com/docker/docker
-  __Godeps/_workspace/src/github.com/docker/go-units
+    Godeps/_workspace/src/github.com/docker/go-units
     Godeps/_workspace/src/github.com/godbus/dbus
     Godeps/_workspace/src/github.com/golang/protobuf
     Godeps/_workspace/src/github.com/syndtr/gocapability
