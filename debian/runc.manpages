@@ -1,1 +1,1 @@
-debian/runc.1
+man/man8/*.8

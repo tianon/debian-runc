@@ -1,3 +1,17 @@
+runc (0.0.9+dfsg-1) UNRELEASED; urgency=medium
+
+  * New upstream release [March 2016].
+  * (Build-)Depends:
+    - golang-github-opencontainers-specs-dev
+    + golang-github-opencontainers-specs-dev (>= 0.4.0~)
+    - golang-codegangsta-cli-dev
+    + golang-github-codegangsta-cli-dev (>= 0.0~git20151221~)
+    - help2man
+    + go-md2man
+  * Install upstream man pages.
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Fri, 25 Mar 2016 20:50:04 +1100
+
 runc (0.0.8+dfsg-2) unstable; urgency=medium
 
   * (Build-)Depends:

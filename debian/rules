@@ -15,13 +15,10 @@ override_dh_clean:
 
 override_dh_auto_configure:
 	$(MAKE) -C libcontainer/criurpc
+	cd man && ./md2man-all.sh
 	dh_auto_configure
-	ln -svrf Godeps/_workspace/src/github.com/opencontainers/specs  _build/src/github.com/opencontainers/
+#	ln -svrf Godeps/_workspace/src/github.com/opencontainers/specs  _build/src/github.com/opencontainers/
 
-override_dh_auto_test: _build/runc.1
+override_dh_auto_test:
 	## Ignoring errors (some tests need network):
 	-dh_auto_test
-
-_build/runc.1:
-	help2man --no-info _build/bin/runc >"$@"
-	[ -s "$@" ] || $(RM) -v "$@"
