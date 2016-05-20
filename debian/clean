@@ -1,4 +1,4 @@
-libcontainer/criurpc/criurpc.pb.go
+#libcontainer/criurpc/criurpc.pb.go
 
 ## Remove generated man pages:
 man/man8/*
