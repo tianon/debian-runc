@@ -1,0 +1,24 @@
+#!/usr/bin/make -f
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+export DH_GOPKG := github.com/opencontainers/runc
+
+%:
+	dh $@ --buildsystem=golang --with=golang --builddirectory=_build
+
+override_dh_clean:
+	dh_clean
+	## Remove Files-Excluded (when built from checkout or non-DFSG tarball):
+	$(RM) -rv `perl -0nE 'say $$1 if m{^Files\-Excluded\:\s*(.*?)(?:\n\n|Files:|Comment:)}sm;' debian/copyright`
+
+override_dh_auto_configure:
+	$(MAKE) -C libcontainer/criurpc
+	cd man && ./md2man-all.sh
+	dh_auto_configure
+#	ln -svrf Godeps/_workspace/src/github.com/opencontainers/specs  _build/src/github.com/opencontainers/
+
+override_dh_auto_test:
+	## Ignoring errors (some tests need network):
+	-dh_auto_test

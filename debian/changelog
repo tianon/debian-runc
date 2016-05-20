@@ -1,0 +1,54 @@
+runc (0.1.0+dfsg-1) unstable; urgency=medium
+
+  [ Tim Potter ]
+  * Team upload
+  * New upstream release [April 2016]
+    = golang-github-opencontainers-specs-dev (>= 0.5.0~)
+  * De-vendor new dependencies; pquerna/ffjson appears unused
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Sat, 23 Apr 2016 07:59:18 +1000
+
+runc (0.0.9+dfsg-1) unstable; urgency=medium
+
+  * New upstream release [March 2016].
+  * (Build-)Depends:
+    = golang-github-opencontainers-specs-dev (>= 0.4.0~)
+    = golang-github-codegangsta-cli-dev (>= 0.0~git20151221~)
+    - help2man
+    + go-md2man
+  * Install upstream man pages.
+  * Install "runc" binary to "/usr/sbin".
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Sat, 16 Apr 2016 17:23:48 +1000
+
+runc (0.0.8+dfsg-2) unstable; urgency=medium
+
+  * (Build-)Depends:
+    + golang-github-docker-go-units-dev
+    + golang-github-seccomp-libseccomp-golang-dev
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Wed, 23 Mar 2016 20:05:01 +1100
+
+runc (0.0.8+dfsg-1) unstable; urgency=medium
+
+  * New upstream release [February 2016].
+  * Build-Depends:
+    + golang-github-vishvananda-netlink-dev
+  * Updated Vcs URLs.
+  * Standards-Version: 3.9.7.
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Fri, 26 Feb 2016 18:19:24 +1100
+
+runc (0.0.4~dfsg-1) unstable; urgency=medium
+
+  * New upstream release (Closes: #802507).
+  * Dropped obsolete lintian-overrides.
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Wed, 21 Oct 2015 09:02:42 +1100
+
+runc (0.0.3~dfsg2-1) unstable; urgency=low
+
+  * Initial release (Closes: #796486).
+    Thanks, Alexandre Viau.
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Sun, 06 Sep 2015 18:06:34 +1000

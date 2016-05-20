@@ -1,0 +1,57 @@
+Source: runc
+Section: devel
+Priority: extra
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Uploaders: Alexandre Viau <alexandre@alexandreviau.net>,
+           Dmitry Smirnov <onlyjob@debian.org>
+Build-Depends: debhelper (>= 9),
+               dh-golang,
+    go-md2man,
+    golang-dbus-dev,
+    golang-docker-dev,
+    golang-github-codegangsta-cli-dev (>= 0.0~git20151221~),
+    golang-github-coreos-go-systemd-dev,
+    golang-github-docker-go-units-dev,
+    golang-github-opencontainers-specs-dev (>= 0.5.0~),
+    golang-github-seccomp-libseccomp-golang-dev,
+    golang-github-vishvananda-netlink-dev,
+    golang-go,
+    golang-gocapability-dev | golang-github-syndtr-gocapability-dev,
+    golang-goprotobuf-dev,
+    golang-logrus-dev,
+    protobuf-compiler
+Standards-Version: 3.9.7
+Homepage: https://github.com/opencontainers/runc
+Vcs-Git: https://anonscm.debian.org/pkg-go/packages/runc.git
+Vcs-Browser: https://anonscm.debian.org/cgit/pkg-go/packages/runc.git
+
+Package: runc
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Built-Using: ${misc:Built-Using}
+Description: Open Container Project - runtime
+ "runc" is a command line client for running applications packaged according
+ to the Open Container Format (OCF) and is a compliant implementation of
+ the Open Container Project specification.
+
+Package: golang-github-opencontainers-runc-dev
+Architecture: all
+Depends: ${misc:Depends},
+    golang-dbus-dev,
+    golang-docker-dev,
+    golang-github-codegangsta-cli-dev (>= 0.0~git20151221~),
+    golang-github-coreos-go-systemd-dev,
+    golang-github-docker-go-units-dev,
+    golang-github-opencontainers-specs-dev (>= 0.4.0~),
+    golang-github-seccomp-libseccomp-golang-dev,
+    golang-github-vishvananda-netlink-dev,
+    golang-gocapability-dev | golang-github-syndtr-gocapability-dev,
+    golang-goprotobuf-dev,
+    golang-logrus-dev
+Description: Open Container Project - develpoment files
+ "runc" is a command line client for running applications packaged according
+ to the Open Container Format (OCF) and is a compliant implementation of
+ the Open Container Project specification.
+ .
+ This package provides development files formerly known as
+ "github.com/docker/libcontainer".

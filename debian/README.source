@@ -1,0 +1,2 @@
+This package uses bundled copy of "github.com/opencontainers/specs" as it
+FTBFS with newer system "golang-github-opencontainers-specs-dev".
