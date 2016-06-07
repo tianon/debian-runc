@@ -1,4 +1,4 @@
-runc (0.1.0-0ubuntu1) UNRELEASED; urgency=medium
+runc (0.1.0+ubuntu-1) UNRELEASED; urgency=medium
 
   * Use bundled dependencies for Ubuntu
 
