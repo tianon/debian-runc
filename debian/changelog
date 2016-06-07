@@ -1,8 +1,9 @@
-runc (0.1.0+ubuntu-1) UNRELEASED; urgency=medium
+runc (0.1.1+ubuntu-1) UNRELEASED; urgency=medium
 
   * Use bundled dependencies for Ubuntu
+  * Update to 0.1.1 upstream release
 
- -- Tianon Gravi <tianon@debian.org>  Fri, 20 May 2016 09:37:52 -0700
+ -- Tianon Gravi <tianon@debian.org>  Tue, 07 Jun 2016 14:09:28 -0700
 
 runc (0.1.0+dfsg-1) unstable; urgency=medium
 
