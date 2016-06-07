@@ -2,6 +2,6 @@ version=3
 
 opts=\
 repacksuffix=+dfsg,\
-dversionmangle=s/[~+]dfsg\d*$// \
+dversionmangle=s/[~+](?:dfsg|ubuntu)\d*$// \
  https://github.com/opencontainers/runc/tags \
  .*/v?(\d[\d\.]*)\.tar\.gz
