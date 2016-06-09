@@ -1,4 +1,4 @@
-runc (0.1.1-0ubuntu1) UNRELEASED; urgency=medium
+runc (0.1.1-0ubuntu1) yakkety; urgency=medium
 
   * Use bundled dependencies for Ubuntu
   * Update to 0.1.1 upstream release
