@@ -20,3 +20,6 @@ override_dh_auto_configure:
 override_dh_auto_test:
 	## Ignoring errors (some tests need network):
 	-dh_auto_test
+
+override_dh_auto_build:
+	dh_auto_build -- -tags apparmor
