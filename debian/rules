@@ -5,21 +5,28 @@
 
 export DH_GOPKG := github.com/opencontainers/runc
 
+# prefer Go 1.6 if it's available (golang-1.6-go)
+export PATH := /usr/lib/go-1.6/bin:$(PATH)
+
+export DH_GOLANG_EXCLUDES := vendor
+
 %:
 	dh $@ --buildsystem=golang --with=golang --builddirectory=_build
 
 override_dh_auto_configure:
 	#$(MAKE) -C libcontainer/criurpc
 	cd man && ./md2man-all.sh
-	# use vendored deps
-	mkdir -p _build \
-		&& cd Godeps/_workspace \
-		&& cp -r . '$(CURDIR)/_build'
 	dh_auto_configure
+	# use vendored deps
+	rm -r '_build/src/$(DH_GOPKG)/Godeps/_workspace' \
+		&& rm -rf '_build/src/$(DH_GOPKG)/vendor' \
+		&& mkdir '_build/src/$(DH_GOPKG)/vendor' \
+		&& cd Godeps/_workspace/src \
+		&& cp -r . '$(CURDIR)/_build/src/$(DH_GOPKG)/vendor'
 
 override_dh_auto_test:
 	## Ignoring errors (some tests need network):
-	-dh_auto_test
+	-dh_auto_test -- -test.short
 
 override_dh_auto_build:
 	dh_auto_build -- -tags apparmor

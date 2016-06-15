@@ -1,3 +1,9 @@
+runc (0.1.1-0ubuntu5) UNRELEASED; urgency=medium
+
+  * Fix "-dev" package Depends, and use vendoring more directly
+
+ -- Tianon Gravi <tianon@debian.org>  Wed, 15 Jun 2016 14:47:50 -0700
+
 runc (0.1.1-0ubuntu4) yakkety; urgency=medium
 
   * Copy d/patches/lxd--runc-617.patch from docker.io package.
