@@ -1,4 +1,4 @@
-runc (0.1.1-0ubuntu5) UNRELEASED; urgency=medium
+runc (0.1.1-0ubuntu5) yakkety; urgency=medium
 
   * Fix "-dev" package Depends, and use vendoring more directly
 
