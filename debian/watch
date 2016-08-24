@@ -2,6 +2,7 @@ version=3
 
 opts=\
 repacksuffix=+dfsg,\
+uversionmangle=s/(\d)[_\.\-\+]?((RC|rc|pre|dev|beta|alpha|preview)\d*)$/$1~$2/,\
 dversionmangle=s/[~+]dfsg\d*$// \
  https://github.com/opencontainers/runc/tags \
- .*/v?(\d[\d\.]*)\.tar\.gz
+ .*/v?(\d[\d\S]*)\.tar\.gz
