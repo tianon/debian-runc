@@ -1,4 +1,4 @@
-runc (1.0.0~rc1-0ubuntu1) UNRELEASED; urgency=medium
+runc (1.0.0~rc1-0ubuntu1) yakkety; urgency=medium
 
   * Update to 1.0.0-rc1 upstream release
     - remove "lxd--runc-617.patch"; no longer necessary (due to kernel fixes),
