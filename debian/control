@@ -9,7 +9,9 @@ Build-Depends: debhelper (>= 9),
                dh-golang,
                go-md2man,
                golang-go (>= 2:1.6~) | golang-1.6-go,
-               libapparmor-dev
+               libapparmor-dev,
+               libseccomp-dev,
+               pkg-config
 Standards-Version: 3.9.7
 Homepage: https://github.com/opencontainers/runc
 Vcs-Git: https://anonscm.debian.org/pkg-go/packages/runc.git

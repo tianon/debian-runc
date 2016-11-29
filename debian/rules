@@ -4,6 +4,8 @@
 #export DH_VERBOSE=1
 
 export DH_GOPKG := github.com/opencontainers/runc
+export DH_GOLANG_INSTALL_EXTRA := libcontainer/seccomp/fixtures
+TAGS=apparmor seccomp
 
 # prefer Go 1.6 if it's available (golang-1.6-go)
 export PATH := /usr/lib/go-1.6/bin:$(PATH)
@@ -27,21 +29,17 @@ override_dh_auto_configure:
 # The go tool does not fully support vendoring with gccgo, but we can
 # work around that by constructing the appropriate -I flag by hand.
 GCCGO := $(shell go tool dist env > /dev/null 2>&1 && echo no || echo yes)
-
 ifeq ($(GCCGO),yes)
 GOARCH := $(shell go env GOARCH)
 GOOS := $(shell go env GOOS)
+GCCGOFLAGS := -gccgoflags='-I $(CURDIR)/_build/pkg/gccgo_$(GOOS)_$(GOARCH)/$(DH_GOPKG)/vendor'
+else
+GCCGOFLAGS :=
+endif
 
 override_dh_auto_build:
-	dh_auto_build -- -tags apparmor -gccgoflags="-I $(CURDIR)/_build/pkg/gccgo_$(GOOS)_$(GOARCH)/$(DH_GOPKG)/vendor"
+	dh_auto_build -- -tags '$(TAGS)' $(GCCGOFLAGS)
 
-override_dh_auto_test:
-	-dh_auto_test -- -test.short -gccgoflags="-I $(CURDIR)/_build/pkg/gccgo_$(GOOS)_$(GOARCH)/$(DH_GOPKG)/vendor"
-else
 override_dh_auto_test:
 	## Ignoring errors (some tests need network):
-	-dh_auto_test -- -test.short
-
-override_dh_auto_build:
-	dh_auto_build -- -tags apparmor
-endif
+	-dh_auto_test -- -tags '$(TAGS)' -test.short $(GCCGOFLAGS)
