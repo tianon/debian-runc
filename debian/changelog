@@ -1,7 +1,7 @@
 runc (1.0.0~rc2-0ubuntu1) UNRELEASED; urgency=medium
 
   * Update to 1.0.0-rc2 upstream release
-  * Add patch for CVE-2016-9962
+  * Add patch for CVE-2016-9962 (LP: #1655906)
 
  -- Tianon Gravi <tianon@debian.org>  Thu, 12 Jan 2017 09:32:46 -0800
 
