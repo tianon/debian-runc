@@ -1,3 +1,9 @@
+runc (1.0.0~rc2-0ubuntu1) UNRELEASED; urgency=medium
+
+  * Update to 1.0.0-rc2 upstream release
+
+ -- Tianon Gravi <tianon@debian.org>  Thu, 12 Jan 2017 09:32:46 -0800
+
 runc (1.0.0~rc1-0ubuntu2) zesty; urgency=medium
 
   [ Tianon Gravi ]
