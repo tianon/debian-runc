@@ -1,0 +1,78 @@
+From 5f2297728fa852f3ef67079c6372eaa9be477796 Mon Sep 17 00:00:00 2001
+From: Christian Brauner <christian.brauner@ubuntu.com>
+Date: Wed, 18 Jan 2017 18:43:36 +0100
+Subject: [PATCH] nsexec: make runC/Docker work in unpriv LXD
+
+Only set us undumpable when we are not in a user namespace. This is needed to
+make runC work in unprivileged LXD. Otherwise, runC's init process will not be
+able to read any files from /proc/<pid1_in_container>. This is needed until
+https://lists.linuxfoundation.org/pipermail/containers/2017-January/037759.html
+is merged and backported.
+
+Signed-off-by: Christian Brauner <christian.brauner@ubuntu.com>
+---
+ libcontainer/nsenter/nsexec.c | 42 ++++++++++++++++++++++++++++++++++++++----
+ 1 file changed, 38 insertions(+), 4 deletions(-)
+
+--- a/libcontainer/nsenter/nsexec.c
++++ b/libcontainer/nsenter/nsexec.c
+@@ -393,11 +393,37 @@
+ 	free(config->data);
+ }
+ 
++/* COMMENT(brauner): Check if we are running inside a user namespace. */
++bool am_in_userns()
++{
++	char *line = NULL;
++	size_t sz = 0;
++	uid_t nsid = 0, hostid = 0, range = 4294967295;
++	FILE *f;
++
++	f = fopen("/proc/self/uid_map", "r");
++	if (!f)
++		return false;
++
++	if (getline(&line, &sz, f) < 0)
++		return false;
++
++	(void)sscanf(line, "%u %u %u", &nsid, &hostid, &range);
++
++	if (nsid == 0 && hostid == 0 && range == 4294967295)
++		return true;
++
++	fclose(f);
++	free(line);
++
++	return true;
++}
++
+ void nsexec(void)
+ {
+ 	int pipenum;
+ 	jmp_buf env;
+-	int syncpipe[2];
++	int syncpipe[2] = {0};
+ 	struct nlconfig_t config = {0};
+ 
+ 	/*
+@@ -408,9 +434,17 @@
+ 	if (pipenum == -1)
+ 		return;
+ 
+-	/* make the process non-dumpable */
+-	if (prctl(PR_SET_DUMPABLE, 0, 0, 0, 0) != 0) {
+-		bail("failed to set process as non-dumpable");
++	/* COMMENT(brauner): Only set us undumpable when we are not in a user
++	 * namespace. This is needed to make runC work in unprivileged LXD. This
++	 * is needed until
++	 * https://lists.linuxfoundation.org/pipermail/containers/2017-January/037759.html
++	 * is merged and backported.
++	 */
++	if (!am_in_userns()) {
++		/* make the process non-dumpable */
++		if (prctl(PR_SET_DUMPABLE, 0, 0, 0, 0) != 0) {
++			bail("failed to set process as non-dumpable");
++		}
+ 	}
+ 
+ 	/* Parse all of the netlink configuration. */

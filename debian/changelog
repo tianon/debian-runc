@@ -1,3 +1,10 @@
+runc (1.0.0~rc2-0ubuntu2) UNRELEASED; urgency=medium
+
+  * Add d/patches/0001-nsexec-make-runC-Docker-work-in-unpriv-LXD.patch to fix
+    execution in unprivileged containers.
+
+ -- Michael Hudson-Doyle <michael.hudson@ubuntu.com>  Mon, 16 Jan 2017 14:32:05 +1300
+
 runc (1.0.0~rc2-0ubuntu1) zesty; urgency=medium
 
   * Update to 1.0.0-rc2 upstream release
