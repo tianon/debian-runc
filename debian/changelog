@@ -1,4 +1,4 @@
-runc (1.0.0~rc2+docker1.12.6-0ubuntu1) UNRELEASED; urgency=medium
+runc (1.0.0~rc2+docker1.12.6-0ubuntu1) zesty; urgency=medium
 
   * Update to the precise commit included in Docker 1.12.6 (LP: #1675288)
 
