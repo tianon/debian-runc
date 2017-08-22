@@ -1,3 +1,9 @@
+runc (1.0.0~rc2+docker1.13.1-0ubuntu1) UNRELEASED; urgency=medium
+
+  * Update to Docker 1.13.1's commit
+
+ -- Tianon Gravi <tianon@debian.org>  Tue, 22 Aug 2017 09:38:26 -0700
+
 runc (1.0.0~rc2+docker1.12.6-0ubuntu2) artful; urgency=low
 
   * Ignore systemd unified cgroup2 view.  (LP: #1692912)
