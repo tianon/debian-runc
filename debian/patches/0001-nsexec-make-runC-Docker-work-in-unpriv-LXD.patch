@@ -1,7 +1,7 @@
-From 5f2297728fa852f3ef67079c6372eaa9be477796 Mon Sep 17 00:00:00 2001
 From: Christian Brauner <christian.brauner@ubuntu.com>
 Date: Wed, 18 Jan 2017 18:43:36 +0100
 Subject: [PATCH] nsexec: make runC/Docker work in unpriv LXD
+Applied-Upstream: 1.0.0-rc4, https://github.com/opencontainers/runc/pull/774
 
 Only set us undumpable when we are not in a user namespace. This is needed to
 make runC work in unprivileged LXD. Otherwise, runC's init process will not be
@@ -10,14 +10,13 @@ https://lists.linuxfoundation.org/pipermail/containers/2017-January/037759.html
 is merged and backported.
 
 Signed-off-by: Christian Brauner <christian.brauner@ubuntu.com>
----
- libcontainer/nsenter/nsexec.c | 42 ++++++++++++++++++++++++++++++++++++++----
- 1 file changed, 38 insertions(+), 4 deletions(-)
 
+diff --git a/libcontainer/nsenter/nsexec.c b/libcontainer/nsenter/nsexec.c
+index 5b680d0b..b09ad783 100644
 --- a/libcontainer/nsenter/nsexec.c
 +++ b/libcontainer/nsenter/nsexec.c
-@@ -393,11 +393,37 @@
- 	free(config->data);
+@@ -420,11 +420,37 @@ void join_namespaces(char *nslist)
+ 	free(namespaces);
  }
  
 +/* COMMENT(brauner): Check if we are running inside a user namespace. */
@@ -55,7 +54,7 @@ Signed-off-by: Christian Brauner <christian.brauner@ubuntu.com>
  	struct nlconfig_t config = {0};
  
  	/*
-@@ -408,9 +434,17 @@
+@@ -435,9 +461,17 @@ void nsexec(void)
  	if (pipenum == -1)
  		return;
  
