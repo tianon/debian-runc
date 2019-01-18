@@ -1,3 +1,12 @@
+runc (1.0.0~rc6+git20181203.96ec2177-0~ubuntu1) UNRELEASED; urgency=medium
+
+  * Update to https://github.com/opencontainers/runc/commit/96ec2177ae841256168fcf76954f7177af9446eb
+    - See also:
+        https://github.com/containerd/containerd/blob/v1.2.2/RUNC.md
+        https://github.com/containerd/containerd/blob/v1.2.2/vendor.conf#L23
+
+ -- Tianon Gravi <tianon@debian.org>  Thu, 17 Jan 2019 21:06:43 -0800
+
 runc (1.0.0~rc5+dfsg1-4) unstable; urgency=medium
 
   * New patch to disable Hugetlb tests.

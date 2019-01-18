@@ -1,24 +1,6 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: runc
 Source: https://github.com/opencontainers/runc
-Files-Excluded:
-    vendor/github.com/containerd/console
-    vendor/github.com/coreos/go-systemd
-    vendor/github.com/coreos/pkg
-  ~~vendor/github.com/cyphar/filepath-securejoin
-    vendor/github.com/docker/go-units
-    vendor/github.com/godbus/dbus
-    vendor/github.com/golang/protobuf
-    vendor/github.com/mrunalp/fileutils
-    vendor/github.com/opencontainers/runtime-spec
-    vendor/github.com/opencontainers/selinux
-    vendor/github.com/pkg/errors
-    vendor/github.com/seccomp/libseccomp-golang
-    vendor/github.com/sirupsen/logrus
-    vendor/github.com/syndtr/gocapability
-    vendor/github.com/urfave/cli
-    vendor/github.com/vishvananda/netlink
-    vendor/golang.org/x/sys
 
 Files: *
 Copyright: 2012-2015 Docker, Inc.

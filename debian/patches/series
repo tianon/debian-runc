@@ -1,5 +1,3 @@
-mips.patch
 test--fix_TestGetAdditionalGroups.patch
 test--skip-Hugetlb.patch
 test--skip_TestFactoryNewTmpfs.patch
-unuse_SIGUNUSED.patch

@@ -4,33 +4,19 @@
 #export DH_VERBOSE=1
 
 export DH_GOPKG := github.com/opencontainers/runc
-export DH_GOLANG_INSTALL_EXTRA := libcontainer/seccomp/fixtures
+export DH_GOLANG_INSTALL_EXTRA := libcontainer/seccomp/fixtures libcontainer/criurpc
 TAGS=apparmor seccomp selinux ambient
 
 %:
 	dh $@ --buildsystem=golang --with=golang --builddirectory=_build
 
-override_dh_clean:
-	dh_clean
-	## Remove Files-Excluded (when built from checkout or non-DFSG tarball):
-	$(RM) -rv `perl -0nE 'say $$1 if m{^Files\-Excluded\:\s*(.*?)(?:\n\n|Files:|Comment:)}sm;' debian/copyright`
-
 override_dh_auto_configure:
-	$(MAKE) -C libcontainer/criurpc
 	cd man && ./md2man-all.sh
 	dh_auto_configure
-#	## Sub-vendor "github.com/docker/docker/pkg" (system lib takes preference over bundled one):
-#	mkdir -p _build/src/$(DH_GOPKG)/vendor/github.com/docker/docker
-#	if [   -d "/usr/share/gocode/src/github.com/docker/docker/pkg" ]; then \
-#            cp -vr /usr/share/gocode/src/github.com/docker/docker/pkg  _build/src/$(DH_GOPKG)/vendor/github.com/docker/docker/ ;\
-#        elif [ -d "vendor/github.com/docker/docker/pkg" ]; then \
-#            cp -vr vendor/github.com/docker/docker/pkg  _build/src/$(DH_GOPKG)/vendor/github.com/docker/docker/ ;\
-#        fi
 	## Remove extra license files:
 	$(RM) -v \
             _build/src/$(DH_GOPKG)/vendor/github.com/docker/docker/*/*/LICENSE* \
         ;
-#	ln -svrf vendor/github.com/opencontainers/specs  _build/src/github.com/opencontainers/
 
 override_dh_auto_build:
 	dh_auto_build -- -tags "$(TAGS)"
