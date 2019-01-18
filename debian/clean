@@ -1,4 +1,4 @@
-#libcontainer/criurpc/criurpc.pb.go
+libcontainer/criurpc/criurpc.pb.go
 
 ## Remove generated man pages:
 man/man8/*
@@ -7,3 +7,17 @@ man/man8/*
 ## https://github.com/opencontainers/runc/issues/692
 libcontainer/nsenter/nsenter_test.go
 
+## Generated:
+libcontainer/criurpc/criurpc.pb.go
+
+
+## Failing tests:
+
+## Privileged tests:
+### couldn't get cgroup root: mountpoint for cgroup not found
+libcontainer/cgroups/fs/apply_raw_test.go
+
+### FAIL: TestXattr (0.00s)
+###     xattr_test.go:26: Success
+###     xattr_test.go:30: failed
+libcontainer/xattr/xattr_test.go

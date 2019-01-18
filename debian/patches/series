@@ -1,2 +1,5 @@
-0001-nsexec-make-runC-Docker-work-in-unpriv-LXD.patch
-ubuntu-ignore-cgroup2-under-systemd.patch
+mips.patch
+test--fix_TestGetAdditionalGroups.patch
+test--skip-Hugetlb.patch
+test--skip_TestFactoryNewTmpfs.patch
+unuse_SIGUNUSED.patch

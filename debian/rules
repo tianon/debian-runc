@@ -5,41 +5,36 @@
 
 export DH_GOPKG := github.com/opencontainers/runc
 export DH_GOLANG_INSTALL_EXTRA := libcontainer/seccomp/fixtures
-TAGS=apparmor seccomp
-
-# prefer Go 1.6 if it's available (golang-1.6-go)
-export PATH := /usr/lib/go-1.6/bin:$(PATH)
-
-export DH_GOLANG_EXCLUDES := vendor
+TAGS=apparmor seccomp selinux ambient
 
 %:
 	dh $@ --buildsystem=golang --with=golang --builddirectory=_build
 
+override_dh_clean:
+	dh_clean
+	## Remove Files-Excluded (when built from checkout or non-DFSG tarball):
+	$(RM) -rv `perl -0nE 'say $$1 if m{^Files\-Excluded\:\s*(.*?)(?:\n\n|Files:|Comment:)}sm;' debian/copyright`
+
 override_dh_auto_configure:
-	#$(MAKE) -C libcontainer/criurpc
+	$(MAKE) -C libcontainer/criurpc
 	cd man && ./md2man-all.sh
 	dh_auto_configure
-	# use vendored deps
-	rm -r '_build/src/$(DH_GOPKG)/Godeps/_workspace' \
-		&& rm -rf '_build/src/$(DH_GOPKG)/vendor' \
-		&& mkdir '_build/src/$(DH_GOPKG)/vendor' \
-		&& cd Godeps/_workspace/src \
-		&& cp -r . '$(CURDIR)/_build/src/$(DH_GOPKG)/vendor'
-
-# The go tool does not fully support vendoring with gccgo, but we can
-# work around that by constructing the appropriate -I flag by hand.
-GCCGO := $(shell go tool dist env > /dev/null 2>&1 && echo no || echo yes)
-ifeq ($(GCCGO),yes)
-GOARCH := $(shell go env GOARCH)
-GOOS := $(shell go env GOOS)
-GCCGOFLAGS := -gccgoflags='-I $(CURDIR)/_build/pkg/gccgo_$(GOOS)_$(GOARCH)/$(DH_GOPKG)/vendor'
-else
-GCCGOFLAGS :=
-endif
+#	## Sub-vendor "github.com/docker/docker/pkg" (system lib takes preference over bundled one):
+#	mkdir -p _build/src/$(DH_GOPKG)/vendor/github.com/docker/docker
+#	if [   -d "/usr/share/gocode/src/github.com/docker/docker/pkg" ]; then \
+#            cp -vr /usr/share/gocode/src/github.com/docker/docker/pkg  _build/src/$(DH_GOPKG)/vendor/github.com/docker/docker/ ;\
+#        elif [ -d "vendor/github.com/docker/docker/pkg" ]; then \
+#            cp -vr vendor/github.com/docker/docker/pkg  _build/src/$(DH_GOPKG)/vendor/github.com/docker/docker/ ;\
+#        fi
+	## Remove extra license files:
+	$(RM) -v \
+            _build/src/$(DH_GOPKG)/vendor/github.com/docker/docker/*/*/LICENSE* \
+        ;
+#	ln -svrf vendor/github.com/opencontainers/specs  _build/src/github.com/opencontainers/
 
 override_dh_auto_build:
-	dh_auto_build -- -tags '$(TAGS)' $(GCCGOFLAGS)
+	dh_auto_build -- -tags "$(TAGS)"
 
 override_dh_auto_test:
-	## Ignoring errors (some tests need network):
-	-dh_auto_test -- -tags '$(TAGS)' -test.short $(GCCGOFLAGS)
+	DH_GOLANG_EXCLUDES="libcontainer/integration" \
+        dh_auto_test -- -tags "$(TAGS)"

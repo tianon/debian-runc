@@ -1,9 +1,9 @@
 version=3
 
 opts=\
-repacksuffix=+dfsg,\
-uversionmangle=s/(\d)[_\.\-\+]?((RC|rc|pre|dev|beta|alpha|preview)\d*)$/$1~$2/;\
-s/^/1.0.0~rc2+docker/,\
+repack,\
+repacksuffix=+dfsg1,\
+uversionmangle=s/-rc/~rc/,\
 dversionmangle=s/[~+]dfsg\d*$// \
- https://uscan.tianon.xyz/github.com/tianon/docker-runc-tags \
- .*/docker-(\d[\d\S]*)\.tar\.gz
+ https://github.com/opencontainers/runc/releases \
+ .*archive/v?(\d\.\d\.\d.*)\.tar\.gz

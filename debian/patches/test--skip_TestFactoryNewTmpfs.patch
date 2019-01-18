@@ -1,0 +1,17 @@
+Last-Update: 2018-06-15
+Forwarded: not-needed
+Author: Dmitry Smirnov <onlyjob@debian.org>
+Description: disable test (requires root)
+
+--- a/libcontainer/factory_linux_test.go
++++ b/libcontainer/factory_linux_test.go
+@@ -76,8 +76,9 @@
+ 	}
+ }
+ 
+ func TestFactoryNewTmpfs(t *testing.T) {
++t.Skip("DM - skipping privileged test")
+ 	root, rerr := newTestRoot()
+ 	if rerr != nil {
+ 		t.Fatal(rerr)
+ 	}

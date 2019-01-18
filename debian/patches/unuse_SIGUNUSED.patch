@@ -1,0 +1,18 @@
+Last-Update: Tue, 10 Apr 2018 18:40:56 +0200
+Forwarded: https://github.com/opencontainers/runc/pull/1825
+Author: Balint Reczey <rbalint@ubuntu.com>
+Bug-Debian: https://bugs.debian.org/889704
+Description: Stop using unix.SIGUNUSED which has been removed from golang.org/x/sys
+
+--- a/signalmap.go
++++ b/signalmap.go
+@@ -36,9 +36,8 @@
+ 	"TRAP":   unix.SIGTRAP,
+ 	"TSTP":   unix.SIGTSTP,
+ 	"TTIN":   unix.SIGTTIN,
+ 	"TTOU":   unix.SIGTTOU,
+-	"UNUSED": unix.SIGUNUSED,
+ 	"URG":    unix.SIGURG,
+ 	"USR1":   unix.SIGUSR1,
+ 	"USR2":   unix.SIGUSR2,
+ 	"VTALRM": unix.SIGVTALRM,

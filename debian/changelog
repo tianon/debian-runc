@@ -1,82 +1,165 @@
-runc (1.0.0~rc2+docker1.13.1-0ubuntu1) UNRELEASED; urgency=medium
+runc (1.0.0~rc5+dfsg1-4) unstable; urgency=medium
 
-  * Update to Docker 1.13.1's commit
-    - refresh patches
+  * New patch to disable Hugetlb tests.
 
- -- Tianon Gravi <tianon@debian.org>  Tue, 22 Aug 2017 09:38:26 -0700
+ -- Dmitry Smirnov <onlyjob@debian.org>  Thu, 27 Sep 2018 08:16:11 +1000
 
-runc (1.0.0~rc2+docker1.12.6-0ubuntu2) artful; urgency=low
+runc (1.0.0~rc5+dfsg1-3) unstable; urgency=medium
 
-  * Ignore systemd unified cgroup2 view.  (LP: #1692912)
+  * TAGS += ambient
+  * New patch to fix FTBFS on mips* architectures.
 
- -- Andy Whitcroft <apw@ubuntu.com>  Tue, 23 May 2017 12:42:14 +0100
+ -- Dmitry Smirnov <onlyjob@debian.org>  Mon, 18 Jun 2018 11:47:25 +1000
 
-runc (1.0.0~rc2+docker1.12.6-0ubuntu1) zesty; urgency=medium
+runc (1.0.0~rc5+dfsg1-2) unstable; urgency=medium
 
-  * Update to the precise commit included in Docker 1.12.6 (LP: #1675288)
+  * New patch to fix integer overflow on i686.
+  * Build with "selinux" tag (Closes: #865993).
+    Thanks, Laurent Bigonville.
+  * Added myself to uploaders.
 
- -- Tianon Gravi <tianon@debian.org>  Fri, 24 Mar 2017 14:26:40 -0700
+ -- Dmitry Smirnov <onlyjob@debian.org>  Sat, 16 Jun 2018 22:12:23 +1000
 
-runc (1.0.0~rc2-0ubuntu2) zesty; urgency=medium
+runc (1.0.0~rc5+dfsg1-1) unstable; urgency=medium
 
-  * Add d/patches/0001-nsexec-make-runC-Docker-work-in-unpriv-LXD.patch to fix
-    execution in unprivileged containers.
+  * Team upload.
 
- -- Michael Hudson-Doyle <michael.hudson@ubuntu.com>  Thu, 26 Jan 2017 09:03:23 +1300
+  [ Arnaud Rebillout ]
+  * Set minimum requirement for golang-gocapability-dev.
+    And drop the alternative name golang-github-syndtr-gocapability-dev,
+    this name never existed in the first place.
 
-runc (1.0.0~rc2-0ubuntu1) zesty; urgency=medium
+  [ Dmitry Smirnov ]
+  * New upstream release
+  * Testsuite: autopkgtest-pkg-go
+  * Standards-Version: 4.1.4; Priority: optional
+  * debhelper to version 11; compat to version 10.
+  * Added "XS-Go-Import-Path".
+  * (Build-)Depends:
+    - golang-github-codegangsta-cli-dev
+    - golang-github-coreos-pkg-dev
+    - golang-golang-x-sys-dev
+    - golang-logrus-dev
+    + golang-github-containerd-console-dev
+    + golang-github-pkg-errors-dev
+    + golang-github-sirupsen-logrus-dev
+    + golang-github-urfave-cli-dev
 
-  * Update to 1.0.0-rc2 upstream release
-  * Add patch for CVE-2016-9962 (LP: #1655906)
+ -- Dmitry Smirnov <onlyjob@debian.org>  Fri, 15 Jun 2018 21:48:18 +1000
 
- -- Tianon Gravi <tianon@debian.org>  Fri, 13 Jan 2017 12:03:21 +1300
+runc (1.0.0~rc4+dfsg1-6) unstable; urgency=medium
 
-runc (1.0.0~rc1-0ubuntu2) zesty; urgency=medium
+  [ Michael Stapelberg ]
+  * update debian/gitlab-ci.yml (using salsa.debian.org/go-team/ci/cmd/ci)
 
-  [ Tianon Gravi ]
-  * Enable seccomp support (LP: #1639407)
+  [ Dmitry Smirnov ]
+  * Removed myself from uploaders.
 
- -- Steve Langasek <steve.langasek@ubuntu.com>  Wed, 30 Nov 2016 12:31:01 -0800
+  [ Balint Reczey ]
+  * Team upload
+  * Stop using unix.SIGUNUSED which has been removed from golang.org/x/sys
+    (Closes: #889704)
 
-runc (1.0.0~rc1-0ubuntu1) yakkety; urgency=medium
+ -- Balint Reczey <rbalint@ubuntu.com>  Tue, 10 Apr 2018 18:40:56 +0200
 
-  * Update to 1.0.0-rc1 upstream release
-    - remove "lxd--runc-617.patch"; no longer necessary (due to kernel fixes),
-      https://github.com/opencontainers/runc/pull/617#issuecomment-223654149
-  * Update d/watch to match RCs appropriately
+runc (1.0.0~rc4+dfsg1-5) unstable; urgency=medium
 
- -- Tianon Gravi <tianon@debian.org>  Wed, 24 Aug 2016 16:29:26 -0700
+  * Vcs-* urls: pkg-go-team -> go-team.
 
-runc (0.1.1-0ubuntu5) yakkety; urgency=medium
+ -- Alexandre Viau <aviau@debian.org>  Mon, 05 Feb 2018 23:05:40 -0500
 
-  * Fix "-dev" package Depends, and use vendoring more directly
+runc (1.0.0~rc4+dfsg1-4) unstable; urgency=medium
 
- -- Tianon Gravi <tianon@debian.org>  Wed, 15 Jun 2016 14:47:50 -0700
+  * Point vcs-* urls to packages subgroup.
 
-runc (0.1.1-0ubuntu4) yakkety; urgency=medium
+ -- Alexandre Viau <aviau@debian.org>  Thu, 25 Jan 2018 15:23:12 -0500
 
-  * Copy d/patches/lxd--runc-617.patch from docker.io package.
+runc (1.0.0~rc4+dfsg1-3) unstable; urgency=medium
 
- -- Michael Hudson-Doyle <michael.hudson@ubuntu.com>  Tue, 14 Jun 2016 09:52:08 +1200
+  * Change my email to @debian.org.
+  * Move to salsa.debian.org.
 
-runc (0.1.1-0ubuntu3) yakkety; urgency=medium
+ -- Alexandre Viau <aviau@debian.org>  Fri, 29 Dec 2017 00:34:59 -0500
 
-  * No change rebuild to pick up s390x fixes.
+runc (1.0.0~rc4+dfsg1-2) unstable; urgency=medium
 
- -- Michael Hudson-Doyle <michael.hudson@ubuntu.com>  Fri, 10 Jun 2016 14:42:08 +1200
+  * Mark runc breaking docker.io (<= 1.13.1~ds1-2) (Closes: #877146)
 
-runc (0.1.1-0ubuntu2) yakkety; urgency=medium
+ -- Balint Reczey <rbalint@ubuntu.com>  Sat, 30 Sep 2017 11:50:52 -0400
 
-  * Enable apparmor support.
+runc (1.0.0~rc4+dfsg1-1) unstable; urgency=medium
 
- -- Michael Hudson-Doyle <michael.hudson@ubuntu.com>  Thu, 09 Jun 2016 20:24:57 +1200
+  * Team Upload
+  * Update watch file to match release candidates
+  * Update Files-Excuded and d/control to match dependencies of rc4
+  * New upstream release candidate 1.0.0-rc4
+  * Drop obsoleted patches
+  * Drop outdated README.source
+  * Require at least final 1.0.0 release of
+    golang-github-opencontainers-specs-dev (Closes: #858250)
+  * Fix typo in golang-github-opencontainers-runc-dev package description
+    (Closes: #873760)
 
-runc (0.1.1-0ubuntu1) yakkety; urgency=medium
+ -- Balint Reczey <rbalint@ubuntu.com>  Sat, 30 Sep 2017 11:50:50 -0400
 
-  * Use bundled dependencies for Ubuntu
-  * Update to 0.1.1 upstream release
+runc (1.0.0~rc2+git20170201.133.9df8b30-3) unstable; urgency=medium
 
- -- Tianon Gravi <tianon@debian.org>  Tue, 07 Jun 2016 14:09:28 -0700
+  * Replace golang-go with golang-any in Build-Depends
+
+ -- Konstantinos Margaritis <markos@debian.org>  Wed, 09 Aug 2017 15:00:55 +0300
+
+runc (1.0.0~rc2+git20170201.133.9df8b30-2) unstable; urgency=medium
+
+  * Patch to make libcontainer ignore cgroup2 hierarchy. Patch pulled from
+    https://github.com/opencontainers/runc/pull/1266.
+
+ -- Vincent Bernat <bernat@debian.org>  Fri, 30 Jun 2017 07:10:34 +0200
+
+runc (1.0.0~rc2+git20170201.133.9df8b30-1) unstable; urgency=medium
+
+  * New upstream snapshot for Docker 1.13.1.
+
+ -- Tim Potter <tpot@hpe.com>  Wed, 24 May 2017 11:36:40 +1000
+
+runc (1.0.0~rc2+git20161109.131.5137186-2) unstable; urgency=medium
+
+  * Add Breaks line to binary package to avoid messing up previous
+    Docker installs.
+
+ -- Tim Potter <tpot@hpe.com>  Fri, 24 Feb 2017 09:49:06 +1100
+
+runc (1.0.0~rc2+git20161109.131.5137186-1) unstable; urgency=medium
+
+  * New upstream snapshot.
+  * Refresh backported patch for CVE-2016-9962.
+
+ -- Tim Potter <tpot@hpe.com>  Wed, 15 Feb 2017 09:08:52 +1100
+
+runc (0.1.1+dfsg1-2) unstable; urgency=medium
+
+  * Team upload.
+  * Backport patch for CVE-2016-9962 (Closes: #850951)
+
+ -- Tianon Gravi <tianon@debian.org>  Wed, 01 Feb 2017 07:17:54 -0800
+
+runc (0.1.1+dfsg1-1) unstable; urgency=medium
+
+  * New upstream release [June 2016].
+  * testworks: disabled privileged and failing tests.
+  * Build with "apparmor seccomp" tags (Closes: #830818);
+    Build-Depends += "libapparmor-dev".
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Wed, 13 Jul 2016 23:00:43 +1000
+
+runc (0.1.0+dfsg1-1) unstable; urgency=medium
+
+  * Dropped dependency on "golang-docker-dev" in favour of bundled
+    (or build time sub-vendored) "github.com/docker/docker" in order
+    to avoid circular dependency with Docker.
+  * Standards-Version: 3.9.8.
+  * Corrected Vcs-Git URL.
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Sun, 12 Jun 2016 17:56:45 +1000
 
 runc (0.1.0+dfsg-1) unstable; urgency=medium
 

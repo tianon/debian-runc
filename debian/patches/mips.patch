@@ -1,0 +1,42 @@
+Origin: upstream, https://github.com/opencontainers/runc/commit/a0e99e7a1a12c19839e2779fa3dfb43cf73bbf73.patch
+Forwarded: not-needed
+Bug-Upstream: https://github.com/opencontainers/runc/issues/1823
+From: Aleksa Sarai <asarai@suse.de>
+Date: Sun, 17 Jun 2018 11:22:01 +1000
+Subject: [PATCH] libcontainer: devices: fix mips builds
+
+It turns out that MIPS uses uint32 in the device number returned by
+stat(2), so explicitly wrap everything to make the compiler happy. I
+really wish that Go had C-like numeric type promotion.
+
+Signed-off-by: Aleksa Sarai <asarai@suse.de>
+---
+ libcontainer/devices/devices.go | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+--- a/libcontainer/devices/devices.go
++++ b/libcontainer/devices/devices.go
+@@ -29,10 +29,11 @@
+ 		return nil, err
+ 	}
+ 
+ 	var (
+-		devNumber = stat.Rdev
++		devNumber = uint64(stat.Rdev)
+ 		major     = unix.Major(devNumber)
++		minor     = unix.Minor(devNumber)
+ 	)
+ 	if major == 0 {
+ 		return nil, ErrNotADevice
+ 	}
+@@ -50,9 +51,9 @@
+ 	return &configs.Device{
+ 		Type:        devType,
+ 		Path:        path,
+ 		Major:       int64(major),
+-		Minor:       int64(unix.Minor(devNumber)),
++		Minor:       int64(minor),
+ 		Permissions: permissions,
+ 		FileMode:    os.FileMode(mode),
+ 		Uid:         stat.Uid,
+ 		Gid:         stat.Gid,
