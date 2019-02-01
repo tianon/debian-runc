@@ -1,4 +1,4 @@
-runc (1.0.0~rc6+git20181203.96ec2177-0~ubuntu1) UNRELEASED; urgency=medium
+runc (1.0.0~rc6+git20181203.96ec2177-0~ubuntu1) disco; urgency=medium
 
   * Update to https://github.com/opencontainers/runc/commit/96ec2177ae841256168fcf76954f7177af9446eb
     - See also:
