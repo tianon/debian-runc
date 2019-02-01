@@ -1,7 +1,8 @@
 Source: runc
 Section: devel
 Priority: optional
-Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+XSBC-Original-Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
 Uploaders: Alexandre Viau <aviau@debian.org>,
            Dmitry Smirnov <onlyjob@debian.org>,
            Tim Potter <tpot@hpe.com>
