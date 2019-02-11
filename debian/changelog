@@ -1,3 +1,10 @@
+runc (1.0.0~rc6+git20181203.96ec2177-0~ubuntu2) UNRELEASED; urgency=medium
+
+  * d/patches/0001-nsenter-clone-proc-self-exe-to-avoid-exposing-host-b.patch:
+    Apply upstream fix for CVE-2019-5736.
+
+ -- Michael Hudson-Doyle <michael.hudson@ubuntu.com>  Tue, 12 Feb 2019 11:52:37 +1300
+
 runc (1.0.0~rc6+git20181203.96ec2177-0~ubuntu1) disco; urgency=medium
 
   * Update to https://github.com/opencontainers/runc/commit/96ec2177ae841256168fcf76954f7177af9446eb
