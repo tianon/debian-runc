@@ -1,4 +1,4 @@
-runc (1.0.0~rc6+git20181203.96ec2177-0ubuntu1) UNRELEASED; urgency=medium
+runc (1.0.0~rc6+git20181203.96ec2177-0ubuntu1) disco; urgency=medium
 
   * Add "basic-smoke" autopkgtest to verify basic functionality
 
