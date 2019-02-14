@@ -1,0 +1,3 @@
+Tests: basic-smoke
+Depends: busybox-static, @
+Restrictions: allow-stderr isolation-machine needs-root
