@@ -1,4 +1,3 @@
 test--fix_TestGetAdditionalGroups.patch
 test--skip-Hugetlb.patch
 test--skip_TestFactoryNewTmpfs.patch
-0001-nsenter-clone-proc-self-exe-to-avoid-exposing-host-b.patch
