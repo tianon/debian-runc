@@ -6,7 +6,7 @@ XSBC-Original-Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.ali
 Uploaders: Alexandre Viau <aviau@debian.org>,
            Dmitry Smirnov <onlyjob@debian.org>,
            Tim Potter <tpot@hpe.com>
-Build-Depends: debhelper (>= 11~),
+Build-Depends: debhelper,
                dh-golang,
                go-md2man,
                golang-any,
