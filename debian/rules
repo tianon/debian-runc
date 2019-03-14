@@ -7,6 +7,8 @@ export DH_GOPKG := github.com/opencontainers/runc
 export DH_GOLANG_INSTALL_EXTRA := libcontainer/seccomp/fixtures libcontainer/criurpc
 TAGS=apparmor seccomp selinux ambient
 
+export PATH := /usr/lib/go-1.10/bin:$(PATH)
+
 %:
 	dh $@ --buildsystem=golang --with=golang --builddirectory=_build
 
