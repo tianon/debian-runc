@@ -4,7 +4,7 @@
 #export DH_VERBOSE=1
 
 export DH_GOPKG := github.com/opencontainers/runc
-export DH_GOLANG_INSTALL_EXTRA := libcontainer/seccomp/fixtures libcontainer/criurpc
+export DH_GOLANG_INSTALL_EXTRA := libcontainer/seccomp/fixtures
 TAGS=apparmor seccomp selinux ambient
 
 export PATH := /usr/lib/go-1.10/bin:$(PATH)
@@ -15,6 +15,9 @@ export PATH := /usr/lib/go-1.10/bin:$(PATH)
 override_dh_auto_configure:
 	cd man && ./md2man-all.sh
 	dh_auto_configure
+	for path in $$DH_GOLANG_INSTALL_EXTRA; do \
+		cp -a $$path _build/src/$$DH_GOPKG/$$path; \
+	done
 	## Remove extra license files:
 	$(RM) -v \
             _build/src/$(DH_GOPKG)/vendor/github.com/docker/docker/*/*/LICENSE* \
