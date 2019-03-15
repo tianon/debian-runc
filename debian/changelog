@@ -1,3 +1,9 @@
+runc (1.0.0~rc6+git20190307.2b18fe1d-0ubuntu2) UNRELEASED; urgency=medium
+
+  * Fix dependencies of golang-github-opencontainers-runc-dev package.
+
+ -- Michael Hudson-Doyle <michael.hudson@ubuntu.com>  Fri, 15 Mar 2019 14:40:44 +1300
+
 runc (1.0.0~rc6+git20190307.2b18fe1d-0ubuntu1) disco; urgency=medium
 
   * Update to https://github.com/opencontainers/runc/commit/2b18fe1d885ee5083ef9f0838fee39b62d653e30

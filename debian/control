@@ -33,18 +33,7 @@ Description: Open Container Project - runtime
 
 Package: golang-github-opencontainers-runc-dev
 Architecture: all
-Depends: golang-dbus-dev,
-         golang-github-coreos-go-systemd-dev,
-         golang-github-docker-go-units-dev,
-         golang-github-opencontainers-selinux-dev,
-         golang-github-opencontainers-specs-dev (>= 1.0.0-0~),
-         golang-github-seccomp-libseccomp-golang-dev,
-         golang-github-sirupsen-logrus-dev (>= 1.0.2~),
-         golang-github-urfave-cli-dev,
-         golang-github-vishvananda-netlink-dev,
-         golang-gocapability-dev (>= 0.0~git20160928~),
-         golang-goprotobuf-dev,
-         ${misc:Depends}
+Depends: ${misc:Depends}
 Description: Open Container Project - development files
  "runc" is a command line client for running applications packaged according
  to the Open Container Format (OCF) and is a compliant implementation of
