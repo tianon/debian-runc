@@ -1,10 +1,10 @@
-runc (1.0.0~rc7+git20190403.029124da-0ubuntu1~16.04.3) UNRELEASED; urgency=medium
+runc (1.0.0~rc7+git20190403.029124da-0ubuntu1~16.04.3) xenial; urgency=medium
 
   * Correct build dependencies on s390x.
   * Fix build on powerc (need to check for binary-arch as well as binary
     target).
 
- -- Michael Hudson-Doyle <michael.hudson@ubuntu.com>  Wed, 22 May 2019 13:49:43 +1200
+ -- Michael Hudson-Doyle <michael.hudson@ubuntu.com>  Wed, 22 May 2019 13:59:55 +1200
 
 runc (1.0.0~rc7+git20190403.029124da-0ubuntu1~16.04.2) xenial; urgency=medium
 
