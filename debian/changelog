@@ -1,9 +1,9 @@
-runc (1.0.0~rc7+git20190403.029124da-0ubuntu1~16.04.2) UNRELEASED; urgency=medium
+runc (1.0.0~rc7+git20190403.029124da-0ubuntu1~16.04.2) xenial; urgency=medium
 
   * Build an empty package on powerpc that tells the user about itself on
     powerpc. 
 
- -- Michael Hudson-Doyle <michael.hudson@ubuntu.com>  Wed, 22 May 2019 11:56:31 +1200
+ -- Michael Hudson-Doyle <michael.hudson@ubuntu.com>  Wed, 22 May 2019 12:17:26 +1200
 
 runc (1.0.0~rc7+git20190403.029124da-0ubuntu1~16.04.1) xenial; urgency=medium
 
