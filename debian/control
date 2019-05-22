@@ -9,7 +9,7 @@ Uploaders: Alexandre Viau <aviau@debian.org>,
 Build-Depends: debhelper,
                dh-golang,
                go-md2man,
-               golang-1.10-go,
+               golang-1.10-go [amd64 arm64 armhf i386 ppc64el],
                libapparmor-dev,
                libseccomp-dev,
                pkg-config,
@@ -23,6 +23,7 @@ Testsuite: autopkgtest-pkg-go
 
 Package: runc
 Architecture: any
+Pre-Depends: debconf [powerpc]
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Breaks: docker.io (<= 1.13.1~ds1-2)
 Built-Using: ${misc:Built-Using}

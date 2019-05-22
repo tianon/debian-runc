@@ -1,0 +1,3 @@
+Template: runc/obsolete-package
+Type: error
+Description: runc has been replaced with an empty package on powerpc.

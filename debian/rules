@@ -10,7 +10,22 @@ TAGS=apparmor seccomp selinux ambient
 export PATH := /usr/lib/go-1.10/bin:$(PATH)
 
 %:
+ifneq ($(shell dpkg-architecture -qDEB_HOST_ARCH),powerpc)
 	dh $@ --buildsystem=golang --with=golang --builddirectory=_build
+else
+	# powerpc is no longer supported
+	if [ "$@" = "clean" ]; then \
+		rm -f debian/runc.preinst debian/runc.templates; \
+	fi; \
+	if [ "$@" = "binary" ]; then \
+		cp debian/runc.preinst.powerpc debian/runc.preinst; \
+		cp debian/runc.templates.powerpc debian/runc.templates; \
+		dh_installdebconf; \
+		dh_installdeb; \
+		dh_gencontrol; \
+		dh_builddeb; \
+	fi;
+endif
 
 override_dh_auto_configure:
 	cd man && ./md2man-all.sh
