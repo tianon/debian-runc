@@ -1,3 +1,9 @@
+runc (1.0.0~rc8+git20190923.3e425f80-0ubuntu1) eoan; urgency=medium
+
+  * New upstream snapshot, fixing CVE-2019-16884.
+
+ -- Michael Hudson-Doyle <michael.hudson@ubuntu.com>  Mon, 30 Sep 2019 14:12:18 +1300
+
 runc (1.0.0~rc8-0ubuntu1) eoan; urgency=medium
 
   * New upstream version.
