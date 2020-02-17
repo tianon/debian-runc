@@ -1,5 +1,6 @@
-runc (1.0.0~rc8+git20190923.3e425f80-0ubuntu2) UNRELEASED; urgency=medium
+runc (1.0.0~rc10-0ubuntu1) UNRELEASED; urgency=medium
 
+  [ Lucas Kanashiro ]
   * Run dh_golang_autopkgtest with isolation-machine restriction (LP: #1856083)
     - d/control: remove Testsuite field since we are now overwriting the
       autodep8 test definition.
@@ -7,7 +8,10 @@ runc (1.0.0~rc8+git20190923.3e425f80-0ubuntu2) UNRELEASED; urgency=medium
       restriction.
   * d/t/control: Use commas in Restrictions field of basic-smoke test
 
- -- Lucas Kanashiro <lucas.kanashiro@canonical.com>  Thu, 12 Dec 2019 20:18:51 -0300
+  [ Tianon Gravi ]
+  * Update to 1.0.0-rc10 upstream release
+
+ -- Tianon Gravi <tianon@debian.org>  Mon, 17 Feb 2020 09:26:39 -0800
 
 runc (1.0.0~rc8+git20190923.3e425f80-0ubuntu1) eoan; urgency=medium
 
