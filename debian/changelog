@@ -1,4 +1,4 @@
-runc (1.0.0~rc10-0ubuntu1) UNRELEASED; urgency=medium
+runc (1.0.0~rc10-0ubuntu1) focal; urgency=medium
 
   [ Lucas Kanashiro ]
   * Run dh_golang_autopkgtest with isolation-machine restriction (LP: #1856083)
@@ -11,7 +11,7 @@ runc (1.0.0~rc10-0ubuntu1) UNRELEASED; urgency=medium
   [ Tianon Gravi ]
   * Update to 1.0.0-rc10 upstream release
 
- -- Tianon Gravi <tianon@debian.org>  Mon, 17 Feb 2020 09:26:39 -0800
+ -- Tianon Gravi <tianon@debian.org>  Tue, 18 Feb 2020 09:06:24 +1300
 
 runc (1.0.0~rc8+git20190923.3e425f80-0ubuntu1) eoan; urgency=medium
 
