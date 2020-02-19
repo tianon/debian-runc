@@ -1,8 +1,8 @@
-runc (1.0.0~rc10-0ubuntu1~19.10.1) UNRELEASED; urgency=medium
+runc (1.0.0~rc10-0ubuntu1~19.10.1) eoan; urgency=medium
 
   * Backport to eoan. (LP: #1863669, CVE-2019-19921)
 
- -- Michael Hudson-Doyle <michael.hudson@ubuntu.com>  Tue, 18 Feb 2020 21:23:54 +1300
+ -- Michael Hudson-Doyle <michael.hudson@ubuntu.com>  Wed, 19 Feb 2020 14:03:26 +1300
 
 runc (1.0.0~rc10-0ubuntu1) focal; urgency=medium
 
