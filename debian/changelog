@@ -1,3 +1,9 @@
+runc (1.0.0~rc10-0ubuntu2) groovy; urgency=medium
+
+  * No-change rebuild using new golang
+
+ -- Steve Langasek <steve.langasek@ubuntu.com>  Tue, 22 Sep 2020 08:55:00 +0000
+
 runc (1.0.0~rc10-0ubuntu1) focal; urgency=medium
 
   [ Lucas Kanashiro ]
