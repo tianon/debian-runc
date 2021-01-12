@@ -7,8 +7,7 @@ Description: fix FTBFS on i686
 
 --- a/libcontainer/user/user_test.go
 +++ b/libcontainer/user/user_test.go
-@@ -444,9 +444,9 @@
- 
+@@ -445,7 +445,7 @@
  	if utils.GetIntSize() > 4 {
  		tests = append(tests, foo{
  			// groups with too large id
@@ -17,11 +16,9 @@ Description: fix FTBFS on i686
  			expected: nil,
  			hasError: true,
  		})
- 	}
 --- a/libcontainer/user/user.go
 +++ b/libcontainer/user/user.go
-@@ -413,9 +413,9 @@
- 			if err != nil {
+@@ -471,7 +471,7 @@
  				return nil, fmt.Errorf("Unable to find group %s", ag)
  			}
  			// Ensure gid is inside gid range.
@@ -30,4 +27,3 @@ Description: fix FTBFS on i686
  				return nil, ErrRange
  			}
  			gidMap[gid] = struct{}{}
- 		}
