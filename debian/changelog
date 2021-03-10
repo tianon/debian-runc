@@ -1,3 +1,11 @@
+runc (1.0.0~rc93-0ubuntu1) UNRELEASED; urgency=medium
+
+  * New upstream release.
+    - runc now has special handling for seccomp profiles to avoid making new
+      syscalls unusable for glibc (LP: #1916485).
+
+ -- Lucas Kanashiro <kanashiro@ubuntu.com>  Tue, 10 Mar 2021 09:30:36 -0300
+
 runc (1.0.0~rc92-0ubuntu1) hirsute; urgency=medium
 
   * New upstream release.
