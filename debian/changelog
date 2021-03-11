@@ -1,3 +1,9 @@
+runc (1.0.0~rc10-0ubuntu1~18.04.2) bionic-security; urgency=medium
+
+  * No change rebuild in the -security pocket.
+
+ -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Mon, 09 Mar 2020 07:58:37 -0400
+
 runc (1.0.0~rc10-0ubuntu1~18.04.1) bionic; urgency=medium
 
   * Backport to bionic. (LP: #1863669, CVE-2019-19921)
