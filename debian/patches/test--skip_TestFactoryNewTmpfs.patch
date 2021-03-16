@@ -5,8 +5,7 @@ Description: disable test (requires root)
 
 --- a/libcontainer/factory_linux_test.go
 +++ b/libcontainer/factory_linux_test.go
-@@ -76,8 +76,9 @@
- 	}
+@@ -78,6 +78,7 @@
  }
  
  func TestFactoryNewTmpfs(t *testing.T) {
@@ -14,4 +13,3 @@ Description: disable test (requires root)
  	root, rerr := newTestRoot()
  	if rerr != nil {
  		t.Fatal(rerr)
- 	}
