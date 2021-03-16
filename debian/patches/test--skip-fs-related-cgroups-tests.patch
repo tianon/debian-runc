@@ -4,7 +4,7 @@ Description: Skip tests which rely on cgroups mountpoints on the filesystem
  are failing.
 Author: Lucas Kanashiro <kanashiro@ubuntu.com>
 Forwarded: not-needed
-Last-Updated: 2021-01-12
+Last-Updated: 2021-03-10
 
 --- a/libcontainer/cgroups/fs/fs_test.go
 +++ b/libcontainer/cgroups/fs/fs_test.go
@@ -16,63 +16,7 @@ Last-Updated: 2021-01-12
  	if cgroups.IsCgroup2UnifiedMode() {
  		t.Skip("cgroup v2 is not supported")
  	}
-@@ -46,6 +47,7 @@
- }
- 
- func TestInvalidAbsoluteCgroupPath(t *testing.T) {
-+	t.Skip("UM - SIGSEGV due to invalid memory access")
- 	if cgroups.IsCgroup2UnifiedMode() {
- 		t.Skip("cgroup v2 is not supported")
- 	}
-@@ -81,6 +83,7 @@
- 
- // XXX: Remove me after we get rid of configs.Cgroup.Name and configs.Cgroup.Parent.
- func TestInvalidCgroupParent(t *testing.T) {
-+	t.Skip("UM - SIGSEGV due to invalid memory access")
- 	if cgroups.IsCgroup2UnifiedMode() {
- 		t.Skip("cgroup v2 is not supported")
- 	}
-@@ -117,6 +120,7 @@
- 
- // XXX: Remove me after we get rid of configs.Cgroup.Name and configs.Cgroup.Parent.
- func TestInvalidAbsoluteCgroupParent(t *testing.T) {
-+	t.Skip("UM - SIGSEGV due to invalid memory access")
- 	if cgroups.IsCgroup2UnifiedMode() {
- 		t.Skip("cgroup v2 is not supported")
- 	}
-@@ -153,6 +157,7 @@
- 
- // XXX: Remove me after we get rid of configs.Cgroup.Name and configs.Cgroup.Parent.
- func TestInvalidCgroupName(t *testing.T) {
-+	t.Skip("UM - SIGSEGV due to invalid memory access")
- 	if cgroups.IsCgroup2UnifiedMode() {
- 		t.Skip("cgroup v2 is not supported")
- 	}
-@@ -190,6 +195,7 @@
- 
- // XXX: Remove me after we get rid of configs.Cgroup.Name and configs.Cgroup.Parent.
- func TestInvalidAbsoluteCgroupName(t *testing.T) {
-+	t.Skip("UM - SIGSEGV due to invalid memory access")
- 	if cgroups.IsCgroup2UnifiedMode() {
- 		t.Skip("cgroup v2 is not supported")
- 	}
-@@ -226,6 +232,7 @@
- 
- // XXX: Remove me after we get rid of configs.Cgroup.Name and configs.Cgroup.Parent.
- func TestInvalidCgroupNameAndParent(t *testing.T) {
-+	t.Skip("UM - SIGSEGV due to invalid memory access")
- 	if cgroups.IsCgroup2UnifiedMode() {
- 		t.Skip("cgroup v2 is not supported")
- 	}
-@@ -262,6 +269,7 @@
- 
- // XXX: Remove me after we get rid of configs.Cgroup.Name and configs.Cgroup.Parent.
- func TestInvalidAbsoluteCgroupNameAndParent(t *testing.T) {
-+	t.Skip("UM - SIGSEGV due to invalid memory access")
- 	if cgroups.IsCgroup2UnifiedMode() {
- 		t.Skip("cgroup v2 is not supported")
- 	}
-@@ -297,6 +305,7 @@
+@@ -93,6 +94,7 @@
  }
  
  func TestTryDefaultCgroupRoot(t *testing.T) {
@@ -82,11 +26,11 @@ Last-Updated: 2021-01-12
  	if cgroups.IsCgroup2UnifiedMode() {
 --- a/libcontainer/cgroups/fscommon/fscommon_test.go
 +++ b/libcontainer/cgroups/fscommon/fscommon_test.go
-@@ -14,6 +14,7 @@
+@@ -12,6 +12,7 @@
  )
  
  func TestWriteCgroupFileHandlesInterrupt(t *testing.T) {
 +	t.Skip("UM - No cgroup mountpoint in memory during build time")
- 	if cgroups.IsCgroup2UnifiedMode() {
- 		t.Skip("cgroup v2 is not supported")
- 	}
+ 	const (
+ 		memoryCgroupMount = "/sys/fs/cgroup/memory"
+ 		memoryLimit       = "memory.limit_in_bytes"
