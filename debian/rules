@@ -7,6 +7,9 @@ export DH_GOPKG := github.com/opencontainers/runc
 export DH_GOLANG_INSTALL_EXTRA := libcontainer/seccomp/fixtures libcontainer/criurpc
 TAGS=apparmor seccomp selinux ambient
 
+# Build with Go 1.13, it FTBFS with Go 1.10 which is the default in Bionic.
+export PATH := /usr/lib/go-1.13/bin:$(PATH)
+
 %:
 	dh $@ --buildsystem=golang --with=golang --builddirectory=_build
 
