@@ -6,8 +6,7 @@ Description: disabled unreliable tests due to random failures on [ppc64el, s390x
 
 --- a/libcontainer/cgroups/fs/hugetlb_test.go
 +++ b/libcontainer/cgroups/fs/hugetlb_test.go
-@@ -87,8 +87,9 @@
- 	}
+@@ -89,6 +89,7 @@
  }
  
  func TestHugetlbStatsNoUsageFile(t *testing.T) {
@@ -15,9 +14,7 @@ Description: disabled unreliable tests due to random failures on [ppc64el, s390x
  	helper := NewCgroupTestUtil("hugetlb", t)
  	defer helper.cleanup()
  	helper.writeFileContents(map[string]string{
- 		maxUsage: hugetlbMaxUsageContents,
-@@ -102,8 +103,9 @@
- 	}
+@@ -104,6 +105,7 @@
  }
  
  func TestHugetlbStatsNoMaxUsageFile(t *testing.T) {
@@ -25,9 +22,7 @@ Description: disabled unreliable tests due to random failures on [ppc64el, s390x
  	helper := NewCgroupTestUtil("hugetlb", t)
  	defer helper.cleanup()
  	for _, pageSize := range HugePageSizes {
- 		helper.writeFileContents(map[string]string{
-@@ -119,8 +121,9 @@
- 	}
+@@ -121,6 +123,7 @@
  }
  
  func TestHugetlbStatsBadUsageFile(t *testing.T) {
@@ -35,9 +30,7 @@ Description: disabled unreliable tests due to random failures on [ppc64el, s390x
  	helper := NewCgroupTestUtil("hugetlb", t)
  	defer helper.cleanup()
  	for _, pageSize := range HugePageSizes {
- 		helper.writeFileContents(map[string]string{
-@@ -137,8 +140,9 @@
- 	}
+@@ -139,6 +142,7 @@
  }
  
  func TestHugetlbStatsBadMaxUsageFile(t *testing.T) {
@@ -45,4 +38,3 @@ Description: disabled unreliable tests due to random failures on [ppc64el, s390x
  	helper := NewCgroupTestUtil("hugetlb", t)
  	defer helper.cleanup()
  	helper.writeFileContents(map[string]string{
- 		usage:    hugetlbUsageContents,
