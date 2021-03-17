@@ -1,4 +1,4 @@
-runc (1.0.0~rc93-0ubuntu1~20.04.1) UNRELEASED; urgency=medium
+runc (1.0.0~rc93-0ubuntu1~20.04.1) focal; urgency=medium
 
   * Backport version 1.0.0~rc93-0ubuntu1 from Hirsute (LP: #1919322,
     LP: #1916485).
