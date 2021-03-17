@@ -7,6 +7,16 @@ export DH_GOPKG := github.com/opencontainers/runc
 export DH_GOLANG_INSTALL_EXTRA := libcontainer/seccomp/fixtures libcontainer/criurpc
 TAGS=apparmor seccomp selinux ambient
 
+# Build with Go 1.13, it FTBFS with Go 1.10 which is the default in Bionic.
+export PATH := /usr/lib/go-1.13/bin:$(PATH)
+
+# Set GOCACHE to a temp directory, dh-golang sets it to "off" but this is not
+# accepted by Go >= 1.12
+export GOCACHE := $(shell mktemp -d)
+
+# GO111MODULE needs to be set to "off" to avoid checking modules information online
+export GO111MODULE := off
+
 %:
 	dh $@ --buildsystem=golang --with=golang --builddirectory=_build
 

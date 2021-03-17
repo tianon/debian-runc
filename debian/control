@@ -9,15 +9,15 @@ Uploaders: Alexandre Viau <aviau@debian.org>,
 Build-Depends: debhelper (>= 11~),
                dh-golang,
                go-md2man,
-               golang-any,
+               golang-1.13-go,
                libapparmor-dev,
                libseccomp-dev,
                pkg-config,
                protobuf-compiler
 Standards-Version: 4.1.4
 Homepage: https://github.com/opencontainers/runc
-Vcs-Git: https://salsa.debian.org/go-team/packages/runc.git
-Vcs-Browser: https://salsa.debian.org/go-team/packages/runc
+Vcs-Git: https://github.com/tianon/debian-runc.git -b ubuntu
+Vcs-Browser: https://github.com/tianon/debian-runc/tree/ubuntu
 XS-Go-Import-Path: github.com/opencontainers/runc
 
 Package: runc
