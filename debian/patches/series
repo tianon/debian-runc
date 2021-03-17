@@ -1,3 +1,4 @@
-test--fix_TestGetAdditionalGroups.patch
 test--skip-Hugetlb.patch
 test--skip_TestFactoryNewTmpfs.patch
+test--skip-fs-related-cgroups-tests.patch
+fix-patchpbf-test-on-32-bit.patch
