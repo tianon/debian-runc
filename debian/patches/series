@@ -1,9 +1,3 @@
 test--skip-Hugetlb.patch
 test--skip_TestFactoryNewTmpfs.patch
 test--skip-fs-related-cgroups-tests.patch
-fix-patchpbf-test-on-32-bit.patch
-CVE-2021-30465/rc93-0001-libct-newInit?Config-nit.patch
-CVE-2021-30465/rc93-0002-libct-rootfs-introduce-and-use-mountConfig.patch
-CVE-2021-30465/rc93-0003-libct-rootfs-mountCgroupV2-minor-refactor.patch
-CVE-2021-30465/rc93-0004-Fix-cgroup2-mount-for-rootless-case.patch
-CVE-2021-30465/rc93-0005-rootfs-add-mount-destination-validation.patch
