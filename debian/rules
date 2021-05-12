@@ -6,6 +6,7 @@
 export DH_GOPKG := github.com/opencontainers/runc
 export DH_GOLANG_INSTALL_EXTRA := libcontainer/seccomp/fixtures libcontainer/criurpc
 TAGS=apparmor seccomp selinux ambient
+VERSION=$(shell dpkg-parsechangelog -SVersion)
 
 %:
 	dh $@ --buildsystem=golang --with=golang --builddirectory=_build
@@ -19,7 +20,7 @@ override_dh_auto_configure:
         ;
 
 override_dh_auto_build:
-	dh_auto_build -- -tags "$(TAGS)"
+	dh_auto_build -- -tags "$(TAGS)" -ldflags "-X main.version=$(VERSION)"
 
 override_dh_auto_test:
 	DH_GOLANG_EXCLUDES="libcontainer/integration" \
