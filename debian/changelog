@@ -1,3 +1,12 @@
+runc (1.0.0~rc93-0ubuntu1~20.04.2) focal-security; urgency=medium
+
+  * SECURITY UPDATE: symlink exchange attack
+    - debian/patches/CVE-2021-30465/*.patch: upstream patches to add mount
+      destination validation.
+    - CVE-2021-30465
+
+ -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Wed, 05 May 2021 14:27:26 -0400
+
 runc (1.0.0~rc93-0ubuntu1~20.04.1) focal; urgency=medium
 
   * Backport version 1.0.0~rc93-0ubuntu1 from Hirsute (LP: #1919322,
