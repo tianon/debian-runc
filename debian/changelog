@@ -1,3 +1,12 @@
+runc (1.0.0~rc95-0ubuntu1~20.10.1) UNRELEASED; urgency=medium
+
+  * New upstream release.
+    - Several regressions were found in 1.0.0-rc93 by upstream and fixed in
+      this new release.
+      + Ensure the scratch pipe is read during ExportBPF (LP: #1927219).
+
+ -- Lucas Kanashiro <kanashiro@ubuntu.com>  Thu, 20 May 2021 11:01:11 -0300
+
 runc (1.0.0~rc93-0ubuntu1~20.10.2) groovy-security; urgency=medium
 
   * SECURITY UPDATE: symlink exchange attack
