@@ -4,6 +4,10 @@ runc (1.0.0~rc95-0ubuntu1~20.10.1) UNRELEASED; urgency=medium
     - Several regressions were found in 1.0.0-rc93 by upstream and fixed in
       this new release.
       + Ensure the scratch pipe is read during ExportBPF (LP: #1927219).
+    - Drop patches applied by upstream:
+      + d/patches/CVE-2021-30465/*.patch
+      + d/patches/fix-patchpbf-test-on-32-bit.patch
+  * d/rules: set VERSION variable when building runc (LP: #1929106).
 
  -- Lucas Kanashiro <kanashiro@ubuntu.com>  Thu, 20 May 2021 11:01:11 -0300
 
