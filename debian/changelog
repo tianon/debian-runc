@@ -1,4 +1,4 @@
-runc (1.0.0~rc95-0ubuntu1~20.04.1) UNRELEASED; urgency=medium
+runc (1.0.0~rc95-0ubuntu1~20.04.1) focal; urgency=medium
 
   * New upstream release.
     - Several regressions were found in 1.0.0-rc93 by upstream and fixed in
