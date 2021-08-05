@@ -4,7 +4,7 @@ Description: Skip tests which rely on cgroups mountpoints on the filesystem
  are failing.
 Author: Lucas Kanashiro <kanashiro@ubuntu.com>
 Forwarded: not-needed
-Last-Updated: 2021-03-10
+Last-Updated: 2021-08-05
 
 --- a/libcontainer/cgroups/fs/fs_test.go
 +++ b/libcontainer/cgroups/fs/fs_test.go
@@ -24,13 +24,3 @@ Last-Updated: 2021-03-10
  	res := tryDefaultCgroupRoot()
  	exp := defaultCgroupRoot
  	if cgroups.IsCgroup2UnifiedMode() {
---- a/libcontainer/cgroups/fscommon/fscommon_test.go
-+++ b/libcontainer/cgroups/fscommon/fscommon_test.go
-@@ -12,6 +12,7 @@
- )
- 
- func TestWriteCgroupFileHandlesInterrupt(t *testing.T) {
-+	t.Skip("UM - No cgroup mountpoint in memory during build time")
- 	const (
- 		memoryCgroupMount = "/sys/fs/cgroup/memory"
- 		memoryLimit       = "memory.limit_in_bytes"
