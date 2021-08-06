@@ -6,4 +6,4 @@ repacksuffix=+dfsg1,\
 uversionmangle=s/-rc/~rc/,\
 dversionmangle=s/[~+]dfsg\d*$// \
  https://github.com/opencontainers/runc/releases \
- .*archive/v?(\d\.\d\.\d.*)\.tar\.gz
+ .*archive/.*v?(\d\.\d\.\d.*)\.tar\.gz

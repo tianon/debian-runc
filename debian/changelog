@@ -1,3 +1,13 @@
+runc (1.0.1-0ubuntu1) impish; urgency=medium
+
+  * New upstream release.
+  * d/watch: adjust regex to correctly match the tarball files on Github.
+  * d/p/test--skip-fs-related-cgroups-tests.patch: update according to the
+    upstream changes.
+  * d/s/lintian-overrides: remove it, the override there is not needed.
+
+ -- Lucas Kanashiro <kanashiro@ubuntu.com>  Thu, 05 Aug 2021 11:48:36 -0300
+
 runc (1.0.0~rc95-0ubuntu1) impish; urgency=medium
 
   * New upstream release.
