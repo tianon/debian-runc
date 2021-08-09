@@ -24,3 +24,13 @@ Last-Updated: 2021-08-05
  	res := tryDefaultCgroupRoot()
  	exp := defaultCgroupRoot
  	if cgroups.IsCgroup2UnifiedMode() {
+--- a/libcontainer/cgroups/file_test.go
++++ b/libcontainer/cgroups/file_test.go
+@@ -12,6 +12,7 @@
+ )
+ 
+ func TestWriteCgroupFileHandlesInterrupt(t *testing.T) {
++	t.Skip("UM - no persmission to write in /sys/fs/cgroup/memory during tests")
+ 	const (
+ 		memoryCgroupMount = "/sys/fs/cgroup/memory"
+ 		memoryLimit       = "memory.limit_in_bytes"
