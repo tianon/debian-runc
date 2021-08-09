@@ -1,3 +1,11 @@
+runc (1.0.1-0ubuntu2) UNRELEASED; urgency=medium
+
+  * d/p/test--skip-fs-related-cgroups-tests.patch: skip a new cgroups related
+    test. It requires permission to write in /sys/fs/cgroup/memory during its
+    execution.
+
+ -- Lucas Kanashiro <kanashiro@ubuntu.com>  Mon, 09 Aug 2021 11:40:32 -0300
+
 runc (1.0.1-0ubuntu1) impish; urgency=medium
 
   * New upstream release.
