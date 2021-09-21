@@ -1,4 +1,22 @@
-runc (1.0.0~rc95-0ubuntu1~18.04.1) bionic; urgency=medium
+runc (1.0.1-0ubuntu2) impish; urgency=medium
+
+  * d/p/test--skip-fs-related-cgroups-tests.patch: skip a new cgroups related
+    test. It requires permission to write in /sys/fs/cgroup/memory during its
+    execution.
+
+ -- Lucas Kanashiro <kanashiro@ubuntu.com>  Mon, 09 Aug 2021 11:40:32 -0300
+
+runc (1.0.1-0ubuntu1) impish; urgency=medium
+
+  * New upstream release.
+  * d/watch: adjust regex to correctly match the tarball files on Github.
+  * d/p/test--skip-fs-related-cgroups-tests.patch: update according to the
+    upstream changes.
+  * d/s/lintian-overrides: remove it, the override there is not needed.
+
+ -- Lucas Kanashiro <kanashiro@ubuntu.com>  Thu, 05 Aug 2021 11:48:36 -0300
+
+runc (1.0.0~rc95-0ubuntu1) impish; urgency=medium
 
   * New upstream release.
     - Several regressions were found in 1.0.0-rc93 by upstream and fixed in
@@ -9,29 +27,16 @@ runc (1.0.0~rc95-0ubuntu1~18.04.1) bionic; urgency=medium
       + d/patches/fix-patchpbf-test-on-32-bit.patch
   * d/rules: set VERSION variable when building runc (LP: #1929106).
 
- -- Lucas Kanashiro <kanashiro@ubuntu.com>  Thu, 20 May 2021 11:11:34 -0300
+ -- Lucas Kanashiro <kanashiro@ubuntu.com>  Thu, 20 May 2021 10:40:14 -0300
 
-runc (1.0.0~rc93-0ubuntu1~18.04.2) bionic-security; urgency=medium
+runc (1.0.0~rc93-0ubuntu2) impish; urgency=medium
 
   * SECURITY UPDATE: symlink exchange attack
     - debian/patches/CVE-2021-30465/*.patch: upstream patches to add mount
       destination validation.
     - CVE-2021-30465
 
- -- Eduardo Barretto <eduardo.barretto@canonical.com>  Thu, 13 May 2021 18:11:36 +0200
-
-runc (1.0.0~rc93-0ubuntu1~18.04.1) bionic; urgency=medium
-
-  * Backport version 1.0.0~rc93-0ubuntu1 from Hirsute (LP: #1919322,
-    LP: #1916485).
-    - Use Go 1.13 to build it, with the default Go 1.10 it FTBFS.
-      + d/control: b-d on golang-1.13-go instead of golang-any,
-      + d/rules: add Go 1.13 to the $PATH.
-    - d/rules: set GOCACHE to a temporary directory. dh-golang sets it to
-      "off" which is not accepted by Go >= 1.12.
-    - d/rules: set GO111MODULE to "off" to avoid getting modules info online.
-
- -- Lucas Kanashiro <kanashiro@ubuntu.com>  Tue, 16 Mar 2021 15:47:19 -0300
+ -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Wed, 05 May 2021 14:27:26 -0400
 
 runc (1.0.0~rc93-0ubuntu1) hirsute; urgency=medium
 
