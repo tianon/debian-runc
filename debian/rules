@@ -8,6 +8,9 @@ export DH_GOLANG_INSTALL_EXTRA := libcontainer/seccomp/fixtures libcontainer/cri
 TAGS=apparmor seccomp selinux ambient
 VERSION=$(shell dpkg-parsechangelog -SVersion)
 
+# Build with Golang 1.13
+export PATH := /usr/lib/go-1.13/bin:$(PATH)
+
 %:
 	dh $@ --buildsystem=golang --with=golang --builddirectory=_build
 
