@@ -12,6 +12,7 @@ VERSION=$(shell dpkg-parsechangelog -SVersion)
 export PATH := /usr/lib/go-1.13/bin:$(PATH)
 
 export GOCACHE := $(CURDIR)/.gocache
+export GO111MODULE := off
 
 %:
 	dh $@ --buildsystem=golang --with=golang --builddirectory=_build
