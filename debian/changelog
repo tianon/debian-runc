@@ -1,4 +1,22 @@
-runc (1.0.0~rc95-0ubuntu1~20.04.1) focal; urgency=medium
+runc (1.0.1-0ubuntu2) impish; urgency=medium
+
+  * d/p/test--skip-fs-related-cgroups-tests.patch: skip a new cgroups related
+    test. It requires permission to write in /sys/fs/cgroup/memory during its
+    execution.
+
+ -- Lucas Kanashiro <kanashiro@ubuntu.com>  Mon, 09 Aug 2021 11:40:32 -0300
+
+runc (1.0.1-0ubuntu1) impish; urgency=medium
+
+  * New upstream release.
+  * d/watch: adjust regex to correctly match the tarball files on Github.
+  * d/p/test--skip-fs-related-cgroups-tests.patch: update according to the
+    upstream changes.
+  * d/s/lintian-overrides: remove it, the override there is not needed.
+
+ -- Lucas Kanashiro <kanashiro@ubuntu.com>  Thu, 05 Aug 2021 11:48:36 -0300
+
+runc (1.0.0~rc95-0ubuntu1) impish; urgency=medium
 
   * New upstream release.
     - Several regressions were found in 1.0.0-rc93 by upstream and fixed in
@@ -9,9 +27,9 @@ runc (1.0.0~rc95-0ubuntu1~20.04.1) focal; urgency=medium
       + d/patches/fix-patchpbf-test-on-32-bit.patch
   * d/rules: set VERSION variable when building runc (LP: #1929106).
 
- -- Lucas Kanashiro <kanashiro@ubuntu.com>  Thu, 20 May 2021 11:06:57 -0300
+ -- Lucas Kanashiro <kanashiro@ubuntu.com>  Thu, 20 May 2021 10:40:14 -0300
 
-runc (1.0.0~rc93-0ubuntu1~20.04.2) focal-security; urgency=medium
+runc (1.0.0~rc93-0ubuntu2) impish; urgency=medium
 
   * SECURITY UPDATE: symlink exchange attack
     - debian/patches/CVE-2021-30465/*.patch: upstream patches to add mount
@@ -19,13 +37,6 @@ runc (1.0.0~rc93-0ubuntu1~20.04.2) focal-security; urgency=medium
     - CVE-2021-30465
 
  -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Wed, 05 May 2021 14:27:26 -0400
-
-runc (1.0.0~rc93-0ubuntu1~20.04.1) focal; urgency=medium
-
-  * Backport version 1.0.0~rc93-0ubuntu1 from Hirsute (LP: #1919322,
-    LP: #1916485).
-
- -- Lucas Kanashiro <kanashiro@ubuntu.com>  Tue, 16 Mar 2021 15:34:35 -0300
 
 runc (1.0.0~rc93-0ubuntu1) hirsute; urgency=medium
 
