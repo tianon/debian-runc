@@ -11,6 +11,8 @@ VERSION=$(shell dpkg-parsechangelog -SVersion)
 # Build with Golang 1.13
 export PATH := /usr/lib/go-1.13/bin:$(PATH)
 
+export GOCACHE := $(CURDIR)/.gocache
+
 %:
 	dh $@ --buildsystem=golang --with=golang --builddirectory=_build
 
