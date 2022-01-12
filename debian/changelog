@@ -1,4 +1,4 @@
-runc (1.0.3-0ubuntu1) UNRELEASED; urgency=medium
+runc (1.0.3-0ubuntu1) jammy; urgency=medium
 
   * New upstream release (LP: #1946899).
   * d/rules: remove DH_GOLANG_INSTALL_EXTRA, the directories listed there do
