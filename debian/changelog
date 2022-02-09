@@ -1,4 +1,4 @@
-runc (1.1.0-0ubuntu1~21.10.1) UNRELEASED; urgency=medium
+runc (1.1.0-0ubuntu1~21.10.1) impish; urgency=medium
 
   * Backport version 1.1.0-ubuntu1 from Jammy (LP: #1960449).
 
