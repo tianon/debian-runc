@@ -4,29 +4,11 @@ Description: Skip tests which rely on cgroups mountpoints on the filesystem
  are failing.
 Author: Lucas Kanashiro <kanashiro@ubuntu.com>
 Forwarded: not-needed
-Last-Updated: 2021-08-05
+Last-Updated: 2022-02-09
 
---- a/libcontainer/cgroups/fs/fs_test.go
-+++ b/libcontainer/cgroups/fs/fs_test.go
-@@ -12,6 +12,7 @@
- )
- 
- func TestInvalidCgroupPath(t *testing.T) {
-+	t.Skip("UM - SIGSEGV due to invalid memory access")
- 	if cgroups.IsCgroup2UnifiedMode() {
- 		t.Skip("cgroup v2 is not supported")
- 	}
-@@ -93,6 +94,7 @@
- }
- 
- func TestTryDefaultCgroupRoot(t *testing.T) {
-+	t.Skip("UM - Cgroup mountpoint is not available during build time")
- 	res := tryDefaultCgroupRoot()
- 	exp := defaultCgroupRoot
- 	if cgroups.IsCgroup2UnifiedMode() {
 --- a/libcontainer/cgroups/file_test.go
 +++ b/libcontainer/cgroups/file_test.go
-@@ -12,6 +12,7 @@
+@@ -11,6 +11,7 @@
  )
  
  func TestWriteCgroupFileHandlesInterrupt(t *testing.T) {
@@ -34,3 +16,41 @@ Last-Updated: 2021-08-05
  	const (
  		memoryCgroupMount = "/sys/fs/cgroup/memory"
  		memoryLimit       = "memory.limit_in_bytes"
+--- a/libcontainer/cgroups/fs/paths_test.go
++++ b/libcontainer/cgroups/fs/paths_test.go
+@@ -10,6 +10,7 @@
+ )
+ 
+ func TestInvalidCgroupPath(t *testing.T) {
++	t.Skip("UM - SIGSEGV due to invalid memory access")
+ 	if cgroups.IsCgroup2UnifiedMode() {
+ 		t.Skip("cgroup v2 is not supported")
+ 	}
+@@ -91,6 +92,7 @@
+ }
+ 
+ func TestTryDefaultCgroupRoot(t *testing.T) {
++	t.Skip("UM - Cgroup mountpoint is not available during build time")
+ 	res := tryDefaultCgroupRoot()
+ 	exp := defaultCgroupRoot
+ 	if cgroups.IsCgroup2UnifiedMode() {
+--- a/libcontainer/cgroups/manager/manager_test.go
++++ b/libcontainer/cgroups/manager/manager_test.go
+@@ -13,6 +13,7 @@
+ // This tests either v1 or v2 managers (both fs and systemd),
+ // depending on what cgroup version is available on the host.
+ func TestNilResources(t *testing.T) {
++	t.Skip("UM - Cgroup mountpoint is not available during build time")
+ 	for _, sd := range []bool{false, true} {
+ 		cg := &configs.Cgroup{} // .Resources is nil
+ 		cg.Systemd = sd
+--- a/libcontainer/factory_linux_test.go
++++ b/libcontainer/factory_linux_test.go
+@@ -121,6 +121,7 @@
+ }
+ 
+ func TestFactoryLoadContainer(t *testing.T) {
++	t.Skip("UM - Cgroup mountpoint is not available during build time")
+ 	root := t.TempDir()
+ 	// setup default container config and state for mocking
+ 	var (
