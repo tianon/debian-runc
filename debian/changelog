@@ -1,3 +1,11 @@
+runc (1.1.0-0ubuntu1~20.04.1) UNRELEASED; urgency=medium
+
+  * Backport version 1.1.0-0ubuntu1 from Jammy (LP: #1960449).
+    - d/control: b-d on golang-1.16-go instead of golang-any.
+    - d/rules: build with Golang 1.16.
+
+ -- Lucas Kanashiro <kanashiro@ubuntu.com>  Wed, 09 Feb 2022 18:00:30 -0300
+
 runc (1.1.0-0ubuntu1) jammy; urgency=medium
 
   * New upstream release.
