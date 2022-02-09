@@ -7,6 +7,9 @@ export DH_GOPKG := github.com/opencontainers/runc
 TAGS=apparmor seccomp selinux ambient
 VERSION=$(shell dpkg-parsechangelog -SVersion)
 
+# Build with Golang 1.16
+export PATH := $(PATH):/usr/lib/go-1.16/bin/
+
 %:
 	dh $@ --buildsystem=golang --with=golang --builddirectory=_build
 
