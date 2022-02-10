@@ -1,4 +1,4 @@
-runc (1.1.0-0ubuntu1) UNRELEASED; urgency=medium
+runc (1.1.0-0ubuntu1) jammy; urgency=medium
 
   * New upstream release.
   * Refresh patches:
