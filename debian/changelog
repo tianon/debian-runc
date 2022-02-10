@@ -1,3 +1,14 @@
+runc (1.1.0-0ubuntu1) jammy; urgency=medium
+
+  * New upstream release.
+  * Refresh patches:
+    - d/p/test--skip_TestFactoryNewTmpfs.patch
+    - d/p/test--skip-fs-related-cgroups-tests.patch
+  * Remove patch not needed anymore:
+    - d/p/test--skip-Hugetlb.patch
+
+ -- Lucas Kanashiro <kanashiro@ubuntu.com>  Wed, 09 Feb 2022 11:46:31 -0300
+
 runc (1.0.3-0ubuntu1) jammy; urgency=medium
 
   * New upstream release (LP: #1946899).
