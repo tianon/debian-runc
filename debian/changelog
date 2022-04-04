@@ -1,4 +1,4 @@
-runc (1.1.0-0ubuntu1~18.04.1) UNRELEASED; urgency=medium
+runc (1.1.0-0ubuntu1~18.04.1) bionic; urgency=medium
 
   * Backport version 1.1.0-0ubuntu1 from Jammy (LP: #1960449).
     - Build with Golang 1.16
