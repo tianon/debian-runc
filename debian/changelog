@@ -1,4 +1,4 @@
-runc (1.1.2-0ubuntu1) UNRELEASED; urgency=medium
+runc (1.1.2-0ubuntu1) kinetic; urgency=medium
 
   * New upstream release.
 
