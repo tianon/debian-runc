@@ -1,3 +1,10 @@
+runc (1.1.0-0ubuntu1.1) jammy; urgency=medium
+
+  * d/p/fix_cpuset_range_byte_order.patch: fix byte order while parsing cpuset
+    range to bits (LP: #1993221)
+
+ -- Chengen Du <chengen.du@canonical.com>  Mon, 17 Oct 2022 15:48:16 +0800
+
 runc (1.1.0-0ubuntu1) jammy; urgency=medium
 
   * New upstream release.
