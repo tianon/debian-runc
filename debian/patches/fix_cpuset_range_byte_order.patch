@@ -9,11 +9,9 @@ Origin: upstream, https://github.com/opencontainers/runc/commit/70e3b757c0eb3922
 Bug: https://github.com/opencontainers/runc/pull/3611
 Bug-Ubuntu: https://bugs.launchpad.net/bugs/1993221
 Last-Update: 2022-10-17
-Index: runc-1.1.2/libcontainer/cgroups/systemd/cpuset.go
-===================================================================
---- runc-1.1.2.orig/libcontainer/cgroups/systemd/cpuset.go
-+++ runc-1.1.2/libcontainer/cgroups/systemd/cpuset.go
-@@ -51,5 +51,10 @@ func RangeToBits(str string) ([]byte, er
+--- a/libcontainer/cgroups/systemd/cpuset.go
++++ b/libcontainer/cgroups/systemd/cpuset.go
+@@ -51,5 +51,10 @@
  		// do not allow empty values
  		return nil, errors.New("empty value")
  	}
@@ -24,11 +22,9 @@ Index: runc-1.1.2/libcontainer/cgroups/systemd/cpuset.go
 +	}
  	return ret, nil
  }
-Index: runc-1.1.2/libcontainer/cgroups/systemd/cpuset_test.go
-===================================================================
---- runc-1.1.2.orig/libcontainer/cgroups/systemd/cpuset_test.go
-+++ runc-1.1.2/libcontainer/cgroups/systemd/cpuset_test.go
-@@ -22,13 +22,13 @@ func TestRangeToBits(t *testing.T) {
+--- a/libcontainer/cgroups/systemd/cpuset_test.go
++++ b/libcontainer/cgroups/systemd/cpuset_test.go
+@@ -22,13 +22,13 @@
  		{in: "4-7", out: []byte{0xf0}},
  		{in: "0-7", out: []byte{0xff}},
  		{in: "0-15", out: []byte{0xff, 0xff}},
@@ -45,11 +41,9 @@ Index: runc-1.1.2/libcontainer/cgroups/systemd/cpuset_test.go
  
  		{in: "-", isErr: true},
  		{in: "1-", isErr: true},
-Index: runc-1.1.2/tests/integration/helpers.bash
-===================================================================
---- runc-1.1.2.orig/tests/integration/helpers.bash
-+++ runc-1.1.2/tests/integration/helpers.bash
-@@ -448,6 +448,13 @@ function requires() {
+--- a/tests/integration/helpers.bash
++++ b/tests/integration/helpers.bash
+@@ -455,6 +455,13 @@
  				skip_me=1
  			fi
  			;;
@@ -63,11 +57,9 @@ Index: runc-1.1.2/tests/integration/helpers.bash
  		*)
  			fail "BUG: Invalid requires $var."
  			;;
-Index: runc-1.1.2/tests/integration/update.bats
-===================================================================
---- runc-1.1.2.orig/tests/integration/update.bats
-+++ runc-1.1.2/tests/integration/update.bats
-@@ -559,6 +559,33 @@ EOF
+--- a/tests/integration/update.bats
++++ b/tests/integration/update.bats
+@@ -559,6 +559,33 @@
  	check_systemd_value "AllowedMemoryNodes" 1
  }
  
