@@ -1,4 +1,4 @@
-runc (1.1.4-0ubuntu1) UNRELEASED; urgency=medium
+runc (1.1.4-0ubuntu1) lunar; urgency=medium
 
   * New upstream release (LP: #1993442).
   * Refresh patches.
