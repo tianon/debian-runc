@@ -1,8 +1,9 @@
 runc (1.1.4-0ubuntu1) UNRELEASED; urgency=medium
 
-  * New upstream release.
+  * New upstream release (LP: #1993442).
+  * Refresh patches.
 
- -- Lucas Kanashiro <kanashiro@ubuntu.com>  Wed, 16 Nov 2022 11:42:42 -0300
+ -- Lucas Kanashiro <kanashiro@ubuntu.com>  Wed, 16 Nov 2022 11:59:36 -0300
 
 runc (1.1.2-0ubuntu1.1) kinetic; urgency=medium
 
