@@ -1,17 +1,22 @@
-runc (1.1.0-0ubuntu1~20.04.2) focal; urgency=medium
+runc (1.1.4-0ubuntu1) lunar; urgency=medium
+
+  * New upstream release (LP: #1993442).
+  * Refresh patches.
+
+ -- Lucas Kanashiro <kanashiro@ubuntu.com>  Wed, 16 Nov 2022 11:59:36 -0300
+
+runc (1.1.2-0ubuntu1.1) kinetic; urgency=medium
 
   * d/p/fix_cpuset_range_byte_order.patch: fix byte order while parsing cpuset
     range to bits (LP: #1993221)
 
- -- Chengen Du <chengen.du@canonical.com>  Mon, 17 Oct 2022 08:59:54 +0000
+ -- Chengen Du <chengen.du@canonical.com>  Mon, 17 Oct 2022 15:59:43 +0800
 
-runc (1.1.0-0ubuntu1~20.04.1) focal; urgency=medium
+runc (1.1.2-0ubuntu1) kinetic; urgency=medium
 
-  * Backport version 1.1.0-0ubuntu1 from Jammy (LP: #1960449).
-    - d/control: b-d on golang-1.16-go instead of golang-any.
-    - d/rules: build with Golang 1.16.
+  * New upstream release.
 
- -- Lucas Kanashiro <kanashiro@ubuntu.com>  Wed, 09 Feb 2022 18:00:30 -0300
+ -- Lucas Kanashiro <kanashiro@ubuntu.com>  Thu, 12 May 2022 16:15:38 -0300
 
 runc (1.1.0-0ubuntu1) jammy; urgency=medium
 
