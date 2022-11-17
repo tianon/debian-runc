@@ -1,14 +1,22 @@
-runc (1.1.0-0ubuntu1~18.04.1) bionic; urgency=medium
+runc (1.1.4-0ubuntu1) lunar; urgency=medium
 
-  * Backport version 1.1.0-0ubuntu1 from Jammy (LP: #1960449).
-    - Build with Golang 1.16
-      + d/control: b-d on golang-1.16-go instead of golang-any.
-      + d/rules: add Golang 1.16 to $PATH.
-    - d/rules: set GO111MODULE to off, to avoid Internet connection during the
-      build.
-    - d/rules: set GOCACHE to build directory.
+  * New upstream release (LP: #1993442).
+  * Refresh patches.
 
- -- Lucas Kanashiro <kanashiro@ubuntu.com>  Thu, 31 Mar 2022 16:03:03 -0300
+ -- Lucas Kanashiro <kanashiro@ubuntu.com>  Wed, 16 Nov 2022 11:59:36 -0300
+
+runc (1.1.2-0ubuntu1.1) kinetic; urgency=medium
+
+  * d/p/fix_cpuset_range_byte_order.patch: fix byte order while parsing cpuset
+    range to bits (LP: #1993221)
+
+ -- Chengen Du <chengen.du@canonical.com>  Mon, 17 Oct 2022 15:59:43 +0800
+
+runc (1.1.2-0ubuntu1) kinetic; urgency=medium
+
+  * New upstream release.
+
+ -- Lucas Kanashiro <kanashiro@ubuntu.com>  Thu, 12 May 2022 16:15:38 -0300
 
 runc (1.1.0-0ubuntu1) jammy; urgency=medium
 
