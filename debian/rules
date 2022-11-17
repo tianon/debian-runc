@@ -10,6 +10,8 @@ VERSION=$(shell dpkg-parsechangelog -SVersion)
 # Build with Golang 1.18
 export PATH := /usr/lib/go-1.18/bin:$(PATH)
 
+export GO111MODULE := off
+
 %:
 	dh $@ --buildsystem=golang --with=golang --builddirectory=_build
 
