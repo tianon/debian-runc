@@ -1,3 +1,9 @@
+runc (1.1.4-0ubuntu2) lunar-proposed; urgency=medium
+
+  * Import blockIODevice.patch from Debian (LP: #2009851)
+
+ -- Reinhard Tartler <siretart@tauware.de>  Fri, 24 Mar 2023 19:05:09 -0400
+
 runc (1.1.4-0ubuntu1) lunar; urgency=medium
 
   * New upstream release (LP: #1993442).
