@@ -1,3 +1,10 @@
+runc (1.1.4-0ubuntu1~20.04.2) focal; urgency=medium
+
+  * d/p/lp2013318-fix-device-files-in-containers.patch: Fix inability to use
+    device files such as /dev/null in containers (LP: #2013318)
+
+ -- Lena Voytek <lena.voytek@canonical.com>  Wed, 12 Apr 2023 13:21:54 -0700
+
 runc (1.1.4-0ubuntu1~20.04.1) focal; urgency=medium
 
   * Backport version 1.1.4-0ubuntu1 from Lunar (LP: #1996909).
