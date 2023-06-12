@@ -23,7 +23,6 @@ XS-Go-Import-Path: github.com/opencontainers/runc
 Package: runc
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
-Breaks: docker.io (<= 1.13.1~ds1-2)
 Built-Using: ${misc:Built-Using}
 Description: Open Container Project - runtime
  "runc" is a command line client for running applications packaged according
