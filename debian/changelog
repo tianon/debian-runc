@@ -1,3 +1,9 @@
+runc (1.1.7-0ubuntu1) UNRELEASED; urgency=medium
+
+  * New upstream release (LP: #2018107).
+
+ -- Lucas Kanashiro <kanashiro@ubuntu.com>  Mon, 12 Jun 2023 17:39:01 -0300
+
 runc (1.1.4-0ubuntu4) mantic; urgency=medium
 
   * SECURITY UPDATE: Incorrect access control through /sys/fs/cgroup
