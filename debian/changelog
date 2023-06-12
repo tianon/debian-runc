@@ -1,6 +1,26 @@
 runc (1.1.7-0ubuntu1) UNRELEASED; urgency=medium
 
   * New upstream release (LP: #2018107).
+    - Update patches in d/patches:
+      + test--skip_TestFactoryNewTmpfs.patch: rename to
+        test--skip-privileged-test-factory_linux_test.go.patch to follow the
+        Debian patch. Also updated it accordingly to Debian.
+      + test--skip-fs-related-cgroups-tests.patch: remove one skipped test,
+        now it is part of the patch above.
+      + fix_cpuset_range_byte_order.patch: removed, applied by upstream.
+        [Applied in upstream version 1.1.7]
+      + lp2013318-fix-device-files-in-containers.patch: removed, fixed by
+        upstream.
+        [Fixed in upstream version 1.1.7]
+      + CVE-2023-25809.patch: removed, applied by upstream.
+        [Applied in upstream version 1.1.7]
+      + CVE-2023-27561_2023-28642.patch: removed, applied by upstream.
+        [Applied in upstream version 1.1.7]
+  * Bump debhelper compatibility level to 12. Now, that Bionic reached EOSS we
+    can update it to level 12.
+    - d/control: build depend on debhelper-compat (= 12) instead of debhelper.
+    - d/compat: removed, not needed anymore.
+  * d/control: remove unneeded Breaks statement for docker.io.
 
  -- Lucas Kanashiro <kanashiro@ubuntu.com>  Mon, 12 Jun 2023 17:39:01 -0300
 
