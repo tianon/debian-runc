@@ -1,0 +1,24 @@
+Description: Skip privileged test: factory_linux_test.go
+Author: Dmitry Smirnov <onlyjob@debian.org>
+Last-Updated: 2023-06-12
+Forwarded: not-needed
+Reviewed-By: Lucas Kanashiro <kanashiro@ubuntu.com>
+
+--- a/libcontainer/factory_linux_test.go
++++ b/libcontainer/factory_linux_test.go
+@@ -60,6 +60,7 @@
+ }
+ 
+ func TestFactoryNewTmpfs(t *testing.T) {
++	t.Skip("DM - skipping privileged test")
+ 	root := t.TempDir()
+ 	factory, err := New(root, TmpfsRoot)
+ 	if err != nil {
+@@ -121,6 +122,7 @@
+ }
+ 
+ func TestFactoryLoadContainer(t *testing.T) {
++	t.Skip("DM - skipping privileged test")
+ 	root := t.TempDir()
+ 	// setup default container config and state for mocking
+ 	var (
