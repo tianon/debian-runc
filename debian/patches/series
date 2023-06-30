@@ -2,3 +2,5 @@ test--skip_TestFactoryNewTmpfs.patch
 test--skip-fs-related-cgroups-tests.patch
 fix_cpuset_range_byte_order.patch
 lp2013318-fix-device-files-in-containers.patch
+CVE-2023-25809.patch
+CVE-2023-27561_2023-28642.patch
