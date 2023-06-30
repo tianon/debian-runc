@@ -1,3 +1,9 @@
+runc (1.1.7-0ubuntu1~23.04.1) UNRELEASED; urgency=medium
+
+  * Backport version from Mantic to Lunar (LP: #2023694).
+
+ -- Lucas Kanashiro <kanashiro@ubuntu.com>  Fri, 30 Jun 2023 17:24:06 -0300
+
 runc (1.1.7-0ubuntu1) mantic; urgency=medium
 
   * New upstream release (LP: #2018107).
