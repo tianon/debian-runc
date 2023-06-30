@@ -1,4 +1,30 @@
-runc (1.1.4-0ubuntu1~22.04.3) jammy-security; urgency=medium
+runc (1.1.7-0ubuntu1) mantic; urgency=medium
+
+  * New upstream release (LP: #2018107).
+    - Update patches in d/patches:
+      + test--skip_TestFactoryNewTmpfs.patch: rename to
+        test--skip-privileged-test-factory_linux_test.go.patch to follow the
+        Debian patch. Also updated it accordingly to Debian.
+      + test--skip-fs-related-cgroups-tests.patch: remove one skipped test,
+        now it is part of the patch above.
+      + fix_cpuset_range_byte_order.patch: removed, applied by upstream.
+        [Applied in upstream version 1.1.7]
+      + lp2013318-fix-device-files-in-containers.patch: removed, fixed by
+        upstream.
+        [Fixed in upstream version 1.1.7]
+      + CVE-2023-25809.patch: removed, applied by upstream.
+        [Applied in upstream version 1.1.7]
+      + CVE-2023-27561_2023-28642.patch: removed, applied by upstream.
+        [Applied in upstream version 1.1.7]
+  * Bump debhelper compatibility level to 12. Now, that Bionic reached EOSS we
+    can update it to level 12.
+    - d/control: build depend on debhelper-compat (= 12) instead of debhelper.
+    - d/compat: removed, not needed anymore.
+  * d/control: remove unneeded Breaks statement for docker.io.
+
+ -- Lucas Kanashiro <kanashiro@ubuntu.com>  Mon, 12 Jun 2023 17:39:01 -0300
+
+runc (1.1.4-0ubuntu4) mantic; urgency=medium
 
   * SECURITY UPDATE: Incorrect access control through /sys/fs/cgroup
     - debian/patches/CVE-2023-25809.patch: apply MS_RDONLY if
@@ -11,20 +37,20 @@ runc (1.1.4-0ubuntu1~22.04.3) jammy-security; urgency=medium
     - CVE-2023-27561
     - CVE-2023-28642
 
- -- David Fernandez Gonzalez <david.fernandezgonzalez@canonical.com>  Mon, 15 May 2023 12:31:53 +0200
+ -- David Fernandez Gonzalez <david.fernandezgonzalez@canonical.com>  Mon, 15 May 2023 13:20:53 +0200
 
-runc (1.1.4-0ubuntu1~22.04.2) jammy; urgency=medium
+runc (1.1.4-0ubuntu3) lunar; urgency=medium
 
   * d/p/lp2013318-fix-device-files-in-containers.patch: Fix inability to use
     device files such as /dev/null in containers (LP: #2013318)
 
- -- Lena Voytek <lena.voytek@canonical.com>  Wed, 12 Apr 2023 13:18:53 -0700
+ -- Lena Voytek <lena.voytek@canonical.com>  Thu, 06 Apr 2023 10:57:46 -0700
 
-runc (1.1.4-0ubuntu1~22.04.1) jammy; urgency=medium
+runc (1.1.4-0ubuntu2) lunar-proposed; urgency=medium
 
-  * Backport version 1.1.4-0ubuntu1 from Lunar (LP: #1996909).
+  * Import blockIODevice.patch from Debian (LP: #2009851)
 
- -- Lucas Kanashiro <kanashiro@ubuntu.com>  Thu, 17 Nov 2022 12:17:32 -0300
+ -- Reinhard Tartler <siretart@tauware.de>  Fri, 24 Mar 2023 19:05:09 -0400
 
 runc (1.1.4-0ubuntu1) lunar; urgency=medium
 
