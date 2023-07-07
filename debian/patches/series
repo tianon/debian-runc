@@ -1,4 +1,3 @@
-test--skip_TestFactoryNewTmpfs.patch
+test--skip-privileged-test-factory_linux_test.go.patch
 test--skip-fs-related-cgroups-tests.patch
-fix_cpuset_range_byte_order.patch
-lp2013318-fix-device-files-in-containers.patch
+0011-export-blockIODevice.patch
